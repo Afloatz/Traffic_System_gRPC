@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_package = "grpc.trafficsystem";
+option java_multiple_files = true;
+option java_outer_classname = "TrafficServiceImpl"; // put name of my service there + Impl for naming convention
+
+package trafficsystem;
+
+service trafficService {
+
+	// Unary: user send a message for emergency
+	rpc sendEmergency(RequestEmergency) returns (EmergencyResponse);
+
+}
+
+message RequestEmergency{
+  string message = 1;
+}
+
+message EmergencyResponse {
+  string text = 1;
+}
