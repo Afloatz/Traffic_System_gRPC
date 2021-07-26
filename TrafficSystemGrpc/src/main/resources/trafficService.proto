@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-option java_package = "grpc.trafficsystem";
+option java_package = "grpc.trafficservice";
 option java_multiple_files = true;
-option java_outer_classname = "TrafficServiceImpl"; // put name of my service there + Impl for naming convention
+option java_outer_classname = "TrafficServiceImpl";
 
-package trafficsystem;
+package trafficservice;
 
 service trafficService {
 

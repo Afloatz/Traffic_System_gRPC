@@ -1,4 +1,4 @@
-package grpc.trafficsystem;
+package grpc.trafficservice;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
@@ -24,33 +24,33 @@ public final class trafficServiceGrpc {
 
   private trafficServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "trafficsystem.trafficService";
+  public static final String SERVICE_NAME = "trafficservice.trafficService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<grpc.trafficsystem.RequestEmergency,
-      grpc.trafficsystem.EmergencyResponse> getSendEmergencyMethod;
+  private static volatile io.grpc.MethodDescriptor<grpc.trafficservice.RequestEmergency,
+      grpc.trafficservice.EmergencyResponse> getSendEmergencyMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "sendEmergency",
-      requestType = grpc.trafficsystem.RequestEmergency.class,
-      responseType = grpc.trafficsystem.EmergencyResponse.class,
+      requestType = grpc.trafficservice.RequestEmergency.class,
+      responseType = grpc.trafficservice.EmergencyResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<grpc.trafficsystem.RequestEmergency,
-      grpc.trafficsystem.EmergencyResponse> getSendEmergencyMethod() {
-    io.grpc.MethodDescriptor<grpc.trafficsystem.RequestEmergency, grpc.trafficsystem.EmergencyResponse> getSendEmergencyMethod;
+  public static io.grpc.MethodDescriptor<grpc.trafficservice.RequestEmergency,
+      grpc.trafficservice.EmergencyResponse> getSendEmergencyMethod() {
+    io.grpc.MethodDescriptor<grpc.trafficservice.RequestEmergency, grpc.trafficservice.EmergencyResponse> getSendEmergencyMethod;
     if ((getSendEmergencyMethod = trafficServiceGrpc.getSendEmergencyMethod) == null) {
       synchronized (trafficServiceGrpc.class) {
         if ((getSendEmergencyMethod = trafficServiceGrpc.getSendEmergencyMethod) == null) {
           trafficServiceGrpc.getSendEmergencyMethod = getSendEmergencyMethod = 
-              io.grpc.MethodDescriptor.<grpc.trafficsystem.RequestEmergency, grpc.trafficsystem.EmergencyResponse>newBuilder()
+              io.grpc.MethodDescriptor.<grpc.trafficservice.RequestEmergency, grpc.trafficservice.EmergencyResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "trafficsystem.trafficService", "sendEmergency"))
+                  "trafficservice.trafficService", "sendEmergency"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  grpc.trafficsystem.RequestEmergency.getDefaultInstance()))
+                  grpc.trafficservice.RequestEmergency.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  grpc.trafficsystem.EmergencyResponse.getDefaultInstance()))
+                  grpc.trafficservice.EmergencyResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new trafficServiceMethodDescriptorSupplier("sendEmergency"))
                   .build();
           }
@@ -91,8 +91,8 @@ public final class trafficServiceGrpc {
      * Unary: user send a message for emergency
      * </pre>
      */
-    public void sendEmergency(grpc.trafficsystem.RequestEmergency request,
-        io.grpc.stub.StreamObserver<grpc.trafficsystem.EmergencyResponse> responseObserver) {
+    public void sendEmergency(grpc.trafficservice.RequestEmergency request,
+        io.grpc.stub.StreamObserver<grpc.trafficservice.EmergencyResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getSendEmergencyMethod(), responseObserver);
     }
 
@@ -102,8 +102,8 @@ public final class trafficServiceGrpc {
             getSendEmergencyMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                grpc.trafficsystem.RequestEmergency,
-                grpc.trafficsystem.EmergencyResponse>(
+                grpc.trafficservice.RequestEmergency,
+                grpc.trafficservice.EmergencyResponse>(
                   this, METHODID_SEND_EMERGENCY)))
           .build();
     }
@@ -132,8 +132,8 @@ public final class trafficServiceGrpc {
      * Unary: user send a message for emergency
      * </pre>
      */
-    public void sendEmergency(grpc.trafficsystem.RequestEmergency request,
-        io.grpc.stub.StreamObserver<grpc.trafficsystem.EmergencyResponse> responseObserver) {
+    public void sendEmergency(grpc.trafficservice.RequestEmergency request,
+        io.grpc.stub.StreamObserver<grpc.trafficservice.EmergencyResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getSendEmergencyMethod(), getCallOptions()), request, responseObserver);
     }
@@ -162,7 +162,7 @@ public final class trafficServiceGrpc {
      * Unary: user send a message for emergency
      * </pre>
      */
-    public grpc.trafficsystem.EmergencyResponse sendEmergency(grpc.trafficsystem.RequestEmergency request) {
+    public grpc.trafficservice.EmergencyResponse sendEmergency(grpc.trafficservice.RequestEmergency request) {
       return blockingUnaryCall(
           getChannel(), getSendEmergencyMethod(), getCallOptions(), request);
     }
@@ -191,8 +191,8 @@ public final class trafficServiceGrpc {
      * Unary: user send a message for emergency
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<grpc.trafficsystem.EmergencyResponse> sendEmergency(
-        grpc.trafficsystem.RequestEmergency request) {
+    public com.google.common.util.concurrent.ListenableFuture<grpc.trafficservice.EmergencyResponse> sendEmergency(
+        grpc.trafficservice.RequestEmergency request) {
       return futureUnaryCall(
           getChannel().newCall(getSendEmergencyMethod(), getCallOptions()), request);
     }
@@ -218,8 +218,8 @@ public final class trafficServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_SEND_EMERGENCY:
-          serviceImpl.sendEmergency((grpc.trafficsystem.RequestEmergency) request,
-              (io.grpc.stub.StreamObserver<grpc.trafficsystem.EmergencyResponse>) responseObserver);
+          serviceImpl.sendEmergency((grpc.trafficservice.RequestEmergency) request,
+              (io.grpc.stub.StreamObserver<grpc.trafficservice.EmergencyResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -243,7 +243,7 @@ public final class trafficServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return grpc.trafficsystem.TrafficServiceImpl.getDescriptor();
+      return grpc.trafficservice.TrafficServiceImpl.getDescriptor();
     }
 
     @java.lang.Override
