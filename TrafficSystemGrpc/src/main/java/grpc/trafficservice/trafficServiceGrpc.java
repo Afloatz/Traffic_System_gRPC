@@ -16,6 +16,9 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
+ * <pre>
+ *This service provides real-time information about the foot/pedestrian traffic situation in popular areas
+ * </pre>
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.15.0)",
@@ -59,6 +62,38 @@ public final class trafficServiceGrpc {
      return getSendEmergencyMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<grpc.trafficservice.Area,
+      grpc.trafficservice.StreetSituation> getLiveFeedMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "LiveFeed",
+      requestType = grpc.trafficservice.Area.class,
+      responseType = grpc.trafficservice.StreetSituation.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<grpc.trafficservice.Area,
+      grpc.trafficservice.StreetSituation> getLiveFeedMethod() {
+    io.grpc.MethodDescriptor<grpc.trafficservice.Area, grpc.trafficservice.StreetSituation> getLiveFeedMethod;
+    if ((getLiveFeedMethod = trafficServiceGrpc.getLiveFeedMethod) == null) {
+      synchronized (trafficServiceGrpc.class) {
+        if ((getLiveFeedMethod = trafficServiceGrpc.getLiveFeedMethod) == null) {
+          trafficServiceGrpc.getLiveFeedMethod = getLiveFeedMethod = 
+              io.grpc.MethodDescriptor.<grpc.trafficservice.Area, grpc.trafficservice.StreetSituation>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "trafficservice.trafficService", "LiveFeed"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.trafficservice.Area.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.trafficservice.StreetSituation.getDefaultInstance()))
+                  .setSchemaDescriptor(new trafficServiceMethodDescriptorSupplier("LiveFeed"))
+                  .build();
+          }
+        }
+     }
+     return getLiveFeedMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -83,6 +118,9 @@ public final class trafficServiceGrpc {
   }
 
   /**
+   * <pre>
+   *This service provides real-time information about the foot/pedestrian traffic situation in popular areas
+   * </pre>
    */
   public static abstract class trafficServiceImplBase implements io.grpc.BindableService {
 
@@ -96,6 +134,16 @@ public final class trafficServiceGrpc {
       asyncUnimplementedUnaryCall(getSendEmergencyMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Server streaming: provide a live feed to the user on the current pedestrian traffic situation in a particular area.
+     * </pre>
+     */
+    public void liveFeed(grpc.trafficservice.Area request,
+        io.grpc.stub.StreamObserver<grpc.trafficservice.StreetSituation> responseObserver) {
+      asyncUnimplementedUnaryCall(getLiveFeedMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -105,11 +153,21 @@ public final class trafficServiceGrpc {
                 grpc.trafficservice.RequestEmergency,
                 grpc.trafficservice.EmergencyResponse>(
                   this, METHODID_SEND_EMERGENCY)))
+          .addMethod(
+            getLiveFeedMethod(),
+            asyncServerStreamingCall(
+              new MethodHandlers<
+                grpc.trafficservice.Area,
+                grpc.trafficservice.StreetSituation>(
+                  this, METHODID_LIVE_FEED)))
           .build();
     }
   }
 
   /**
+   * <pre>
+   *This service provides real-time information about the foot/pedestrian traffic situation in popular areas
+   * </pre>
    */
   public static final class trafficServiceStub extends io.grpc.stub.AbstractStub<trafficServiceStub> {
     private trafficServiceStub(io.grpc.Channel channel) {
@@ -137,9 +195,23 @@ public final class trafficServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getSendEmergencyMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Server streaming: provide a live feed to the user on the current pedestrian traffic situation in a particular area.
+     * </pre>
+     */
+    public void liveFeed(grpc.trafficservice.Area request,
+        io.grpc.stub.StreamObserver<grpc.trafficservice.StreetSituation> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getLiveFeedMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
+   * <pre>
+   *This service provides real-time information about the foot/pedestrian traffic situation in popular areas
+   * </pre>
    */
   public static final class trafficServiceBlockingStub extends io.grpc.stub.AbstractStub<trafficServiceBlockingStub> {
     private trafficServiceBlockingStub(io.grpc.Channel channel) {
@@ -166,9 +238,23 @@ public final class trafficServiceGrpc {
       return blockingUnaryCall(
           getChannel(), getSendEmergencyMethod(), getCallOptions(), request);
     }
+
+    /**
+     * <pre>
+     * Server streaming: provide a live feed to the user on the current pedestrian traffic situation in a particular area.
+     * </pre>
+     */
+    public java.util.Iterator<grpc.trafficservice.StreetSituation> liveFeed(
+        grpc.trafficservice.Area request) {
+      return blockingServerStreamingCall(
+          getChannel(), getLiveFeedMethod(), getCallOptions(), request);
+    }
   }
 
   /**
+   * <pre>
+   *This service provides real-time information about the foot/pedestrian traffic situation in popular areas
+   * </pre>
    */
   public static final class trafficServiceFutureStub extends io.grpc.stub.AbstractStub<trafficServiceFutureStub> {
     private trafficServiceFutureStub(io.grpc.Channel channel) {
@@ -199,6 +285,7 @@ public final class trafficServiceGrpc {
   }
 
   private static final int METHODID_SEND_EMERGENCY = 0;
+  private static final int METHODID_LIVE_FEED = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -220,6 +307,10 @@ public final class trafficServiceGrpc {
         case METHODID_SEND_EMERGENCY:
           serviceImpl.sendEmergency((grpc.trafficservice.RequestEmergency) request,
               (io.grpc.stub.StreamObserver<grpc.trafficservice.EmergencyResponse>) responseObserver);
+          break;
+        case METHODID_LIVE_FEED:
+          serviceImpl.liveFeed((grpc.trafficservice.Area) request,
+              (io.grpc.stub.StreamObserver<grpc.trafficservice.StreetSituation>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -283,6 +374,7 @@ public final class trafficServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new trafficServiceFileDescriptorSupplier())
               .addMethod(getSendEmergencyMethod())
+              .addMethod(getLiveFeedMethod())
               .build();
         }
       }

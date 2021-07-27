@@ -20,7 +20,7 @@ public class TrafficServer {
 	}
 
 	private void start() throws IOException, InterruptedException {
-		// TODO Auto-generated method stub
+
 		System.out.println("Starting traffic Server");
 		
 		int port = 50051; // port number that we will use
