@@ -13,7 +13,7 @@ service trafficService {
 	rpc sendEmergency(RequestEmergency) returns (EmergencyResponse);
 
 	// Server streaming: provide a live feed to the user on the current pedestrian traffic situation in a particular area.
-    rpc LiveFeed (Area) returns (stream StreetSituation);
+    rpc LiveFeed(Area) returns (stream StreetSituation);
 }
 
 message RequestEmergency{
@@ -26,6 +26,7 @@ message EmergencyResponse {
 
 message Area{
   string messageArea = 1;
+  // int32 intArea = 1; // Dublin district area that the user wants info about (D01 to D24)
 }
 
 message StreetSituation {

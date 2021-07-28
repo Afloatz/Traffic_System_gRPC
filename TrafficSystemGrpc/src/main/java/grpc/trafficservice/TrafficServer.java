@@ -39,6 +39,7 @@ public class TrafficServer {
 	// Extend abstract base class for our implementation
 	static class TrafficServerImpl extends trafficServiceImplBase {
 		
+		// Unary method
 		@Override
 		public void sendEmergency(RequestEmergency request, StreamObserver<EmergencyResponse> responseObserver) {
 			
@@ -53,6 +54,34 @@ public class TrafficServer {
 			
 			// Send out message (build our response)
 			responseObserver.onNext(response.build()); // unary, so only 1 message
+		
+			responseObserver.onCompleted();
+		
+		}
+		
+		// Server streaming method
+		@Override
+		public void liveFeed(Area request, StreamObserver<StreetSituation> responseObserver) {
+			
+			// Find out what was sent by client
+			String messageArea= request.getMessageArea();
+			System.out.println("The Dublin district is: " + messageArea);
+		
+			// Now build our response
+			StreetSituation.Builder response = StreetSituation.newBuilder(); // builder object
+		
+			// first response
+			response.setTextSituation("O'Connelll street is very busy with a lot of pedestrians on the road.");			
+			// Send out message (build our response)
+			responseObserver.onNext(response.build()); 
+			
+			// second response that we are sending back to the client
+			response.setTextSituation("Parnell street is has not much pedestrian traffic at the moment.");			
+			responseObserver.onNext(response.build()); 
+			
+			// third response
+			response.setTextSituation("Avoid Bachelors Walk as a protest is happening!");			
+			responseObserver.onNext(response.build()); 
 		
 			responseObserver.onCompleted();
 		
