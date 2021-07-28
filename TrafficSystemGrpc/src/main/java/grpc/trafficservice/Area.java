@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private Area() {
-    messageArea_ = "";
+    intArea_ = 0;
   }
 
   @java.lang.Override
@@ -43,10 +43,9 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 8: {
 
-            messageArea_ = s;
+            intArea_ = input.readInt32();
             break;
           }
           default: {
@@ -81,38 +80,17 @@ private static final long serialVersionUID = 0L;
             grpc.trafficservice.Area.class, grpc.trafficservice.Area.Builder.class);
   }
 
-  public static final int MESSAGEAREA_FIELD_NUMBER = 1;
-  private volatile java.lang.Object messageArea_;
+  public static final int INTAREA_FIELD_NUMBER = 1;
+  private int intArea_;
   /**
-   * <code>string messageArea = 1;</code>
+   * <pre>
+   * Dublin district area that the user wants info about (D01 to D24)
+   * </pre>
+   *
+   * <code>int32 intArea = 1;</code>
    */
-  public java.lang.String getMessageArea() {
-    java.lang.Object ref = messageArea_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      messageArea_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string messageArea = 1;</code>
-   */
-  public com.google.protobuf.ByteString
-      getMessageAreaBytes() {
-    java.lang.Object ref = messageArea_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      messageArea_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public int getIntArea() {
+    return intArea_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -129,8 +107,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getMessageAreaBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, messageArea_);
+    if (intArea_ != 0) {
+      output.writeInt32(1, intArea_);
     }
     unknownFields.writeTo(output);
   }
@@ -141,8 +119,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getMessageAreaBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, messageArea_);
+    if (intArea_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(1, intArea_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -160,8 +139,8 @@ private static final long serialVersionUID = 0L;
     grpc.trafficservice.Area other = (grpc.trafficservice.Area) obj;
 
     boolean result = true;
-    result = result && getMessageArea()
-        .equals(other.getMessageArea());
+    result = result && (getIntArea()
+        == other.getIntArea());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -173,8 +152,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + MESSAGEAREA_FIELD_NUMBER;
-    hash = (53 * hash) + getMessageArea().hashCode();
+    hash = (37 * hash) + INTAREA_FIELD_NUMBER;
+    hash = (53 * hash) + getIntArea();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -308,7 +287,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      messageArea_ = "";
+      intArea_ = 0;
 
       return this;
     }
@@ -336,7 +315,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public grpc.trafficservice.Area buildPartial() {
       grpc.trafficservice.Area result = new grpc.trafficservice.Area(this);
-      result.messageArea_ = messageArea_;
+      result.intArea_ = intArea_;
       onBuilt();
       return result;
     }
@@ -385,9 +364,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(grpc.trafficservice.Area other) {
       if (other == grpc.trafficservice.Area.getDefaultInstance()) return this;
-      if (!other.getMessageArea().isEmpty()) {
-        messageArea_ = other.messageArea_;
-        onChanged();
+      if (other.getIntArea() != 0) {
+        setIntArea(other.getIntArea());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -418,71 +396,40 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object messageArea_ = "";
+    private int intArea_ ;
     /**
-     * <code>string messageArea = 1;</code>
+     * <pre>
+     * Dublin district area that the user wants info about (D01 to D24)
+     * </pre>
+     *
+     * <code>int32 intArea = 1;</code>
      */
-    public java.lang.String getMessageArea() {
-      java.lang.Object ref = messageArea_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        messageArea_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    public int getIntArea() {
+      return intArea_;
     }
     /**
-     * <code>string messageArea = 1;</code>
+     * <pre>
+     * Dublin district area that the user wants info about (D01 to D24)
+     * </pre>
+     *
+     * <code>int32 intArea = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getMessageAreaBytes() {
-      java.lang.Object ref = messageArea_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        messageArea_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string messageArea = 1;</code>
-     */
-    public Builder setMessageArea(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      messageArea_ = value;
+    public Builder setIntArea(int value) {
+      
+      intArea_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string messageArea = 1;</code>
+     * <pre>
+     * Dublin district area that the user wants info about (D01 to D24)
+     * </pre>
+     *
+     * <code>int32 intArea = 1;</code>
      */
-    public Builder clearMessageArea() {
+    public Builder clearIntArea() {
       
-      messageArea_ = getDefaultInstance().getMessageArea();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string messageArea = 1;</code>
-     */
-    public Builder setMessageAreaBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      messageArea_ = value;
+      intArea_ = 0;
       onChanged();
       return this;
     }

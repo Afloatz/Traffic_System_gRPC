@@ -45,15 +45,15 @@ public final class TrafficServiceImpl {
     java.lang.String[] descriptorData = {
       "\n\024trafficService.proto\022\016trafficservice\"#" +
       "\n\020RequestEmergency\022\017\n\007message\030\001 \001(\t\"!\n\021E" +
-      "mergencyResponse\022\014\n\004text\030\001 \001(\t\"\033\n\004Area\022\023" +
-      "\n\013messageArea\030\001 \001(\t\"(\n\017StreetSituation\022\025" +
-      "\n\rtextSituation\030\001 \001(\t2\253\001\n\016trafficService" +
-      "\022T\n\rsendEmergency\022 .trafficservice.Reque" +
-      "stEmergency\032!.trafficservice.EmergencyRe" +
-      "sponse\022C\n\010LiveFeed\022\024.trafficservice.Area" +
-      "\032\037.trafficservice.StreetSituation0\001B+\n\023g" +
-      "rpc.trafficserviceB\022TrafficServiceImplP\001" +
-      "b\006proto3"
+      "mergencyResponse\022\014\n\004text\030\001 \001(\t\"\027\n\004Area\022\017" +
+      "\n\007intArea\030\001 \001(\005\"(\n\017StreetSituation\022\025\n\rte" +
+      "xtSituation\030\001 \001(\t2\253\001\n\016trafficService\022T\n\r" +
+      "sendEmergency\022 .trafficservice.RequestEm" +
+      "ergency\032!.trafficservice.EmergencyRespon" +
+      "se\022C\n\010LiveFeed\022\024.trafficservice.Area\032\037.t" +
+      "rafficservice.StreetSituation0\001B+\n\023grpc." +
+      "trafficserviceB\022TrafficServiceImplP\001b\006pr" +
+      "oto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -84,7 +84,7 @@ public final class TrafficServiceImpl {
     internal_static_trafficservice_Area_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_trafficservice_Area_descriptor,
-        new java.lang.String[] { "MessageArea", });
+        new java.lang.String[] { "IntArea", });
     internal_static_trafficservice_StreetSituation_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_trafficservice_StreetSituation_fieldAccessorTable = new

@@ -8,12 +8,11 @@ public interface AreaOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string messageArea = 1;</code>
+   * <pre>
+   * Dublin district area that the user wants info about (D01 to D24)
+   * </pre>
+   *
+   * <code>int32 intArea = 1;</code>
    */
-  java.lang.String getMessageArea();
-  /**
-   * <code>string messageArea = 1;</code>
-   */
-  com.google.protobuf.ByteString
-      getMessageAreaBytes();
+  int getIntArea();
 }

@@ -63,9 +63,9 @@ public class TrafficServer {
 		@Override
 		public void liveFeed(Area request, StreamObserver<StreetSituation> responseObserver) {
 			
-			// Find out what was sent by client
-			String messageArea= request.getMessageArea();
-			System.out.println("The Dublin district is: " + messageArea);
+			// Find out for which area the client wants information
+			int intArea= request.getIntArea();
+			System.out.println("The Dublin district is: " + intArea);
 		
 			// Now build our response
 			StreetSituation.Builder response = StreetSituation.newBuilder(); // builder object

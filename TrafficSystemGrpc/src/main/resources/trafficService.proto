@@ -25,8 +25,7 @@ message EmergencyResponse {
 }
 
 message Area{
-  string messageArea = 1;
-  // int32 intArea = 1; // Dublin district area that the user wants info about (D01 to D24)
+  int32 intArea = 1; // Dublin district area that the user wants info about (D01 to D24)
 }
 
 message StreetSituation {
