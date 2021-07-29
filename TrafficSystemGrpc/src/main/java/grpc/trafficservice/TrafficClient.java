@@ -1,5 +1,6 @@
 package grpc.trafficservice;
 
+import grpc.trafficservice.trafficServiceGrpc.trafficServiceBlockingStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -12,7 +13,15 @@ public class TrafficClient {
 		String host = "localhost"; // location of the server
 		
 		//Create the channel 
-		ManagedChannel newChannel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+		ManagedChannel trafficChannel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+	
+		//now build our message
+		
+		RequestEmergency rString = RequestEmergency.newBuilder().setMessage("Emergency at Capel Street").build();
+	
+		//Create a stub, pass the channel to the stub
+		//for unary -> need a BlockingStub
+		trafficServiceBlockingStub bStub = trafficServiceGrpc.newBlockingStub(trafficChannel);
 	}
 	
 
