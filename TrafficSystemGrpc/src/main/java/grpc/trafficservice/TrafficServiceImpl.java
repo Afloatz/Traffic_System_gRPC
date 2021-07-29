@@ -34,6 +34,16 @@ public final class TrafficServiceImpl {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_trafficservice_StreetSituation_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficservice_Video_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficservice_Video_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficservice_WarningResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficservice_WarningResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -47,13 +57,16 @@ public final class TrafficServiceImpl {
       "\n\020RequestEmergency\022\017\n\007message\030\001 \001(\t\"!\n\021E" +
       "mergencyResponse\022\014\n\004text\030\001 \001(\t\"\027\n\004Area\022\017" +
       "\n\007intArea\030\001 \001(\005\"(\n\017StreetSituation\022\025\n\rte" +
-      "xtSituation\030\001 \001(\t2\253\001\n\016trafficService\022T\n\r" +
-      "sendEmergency\022 .trafficservice.RequestEm" +
-      "ergency\032!.trafficservice.EmergencyRespon" +
-      "se\022C\n\010LiveFeed\022\024.trafficservice.Area\032\037.t" +
-      "rafficservice.StreetSituation0\001B+\n\023grpc." +
-      "trafficserviceB\022TrafficServiceImplP\001b\006pr" +
-      "oto3"
+      "xtSituation\030\001 \001(\t\"!\n\005Video\022\030\n\020pedestrian" +
+      "Number\030\001 \001(\005\"\037\n\017WarningResponse\022\014\n\004text\030" +
+      "\001 \001(\t2\202\002\n\016trafficService\022T\n\rsendEmergenc" +
+      "y\022 .trafficservice.RequestEmergency\032!.tr" +
+      "afficservice.EmergencyResponse\022C\n\010LiveFe" +
+      "ed\022\024.trafficservice.Area\032\037.trafficservic" +
+      "e.StreetSituation0\001\022U\n\031CalculatePedestri" +
+      "anNumber\022\025.trafficservice.Video\032\037.traffi" +
+      "cservice.WarningResponse(\001B+\n\023grpc.traff" +
+      "icserviceB\022TrafficServiceImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -91,6 +104,18 @@ public final class TrafficServiceImpl {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_trafficservice_StreetSituation_descriptor,
         new java.lang.String[] { "TextSituation", });
+    internal_static_trafficservice_Video_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_trafficservice_Video_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficservice_Video_descriptor,
+        new java.lang.String[] { "PedestrianNumber", });
+    internal_static_trafficservice_WarningResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_trafficservice_WarningResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficservice_WarningResponse_descriptor,
+        new java.lang.String[] { "Text", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

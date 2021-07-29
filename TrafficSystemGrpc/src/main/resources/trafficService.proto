@@ -14,6 +14,10 @@ service trafficService {
 
 	// Server streaming: provide a live feed to the user on the current pedestrian traffic situation in a particular area.
     rpc LiveFeed(Area) returns (stream StreetSituation);
+
+    // Send information from the streets camera to the server
+    // client streaming
+    rpc CalculatePedestrianNumber(stream Video) returns (WarningResponse);
 }
 
 message RequestEmergency{
@@ -30,4 +34,12 @@ message Area{
 
 message StreetSituation {
   string textSituation = 1;
+}
+
+message Video{
+  int32 pedestrianNumber = 1;
+}
+
+message WarningResponse {
+  string text = 1;
 }

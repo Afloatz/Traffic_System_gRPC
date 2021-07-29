@@ -94,6 +94,38 @@ public final class trafficServiceGrpc {
      return getLiveFeedMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<grpc.trafficservice.Video,
+      grpc.trafficservice.WarningResponse> getCalculatePedestrianNumberMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CalculatePedestrianNumber",
+      requestType = grpc.trafficservice.Video.class,
+      responseType = grpc.trafficservice.WarningResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+  public static io.grpc.MethodDescriptor<grpc.trafficservice.Video,
+      grpc.trafficservice.WarningResponse> getCalculatePedestrianNumberMethod() {
+    io.grpc.MethodDescriptor<grpc.trafficservice.Video, grpc.trafficservice.WarningResponse> getCalculatePedestrianNumberMethod;
+    if ((getCalculatePedestrianNumberMethod = trafficServiceGrpc.getCalculatePedestrianNumberMethod) == null) {
+      synchronized (trafficServiceGrpc.class) {
+        if ((getCalculatePedestrianNumberMethod = trafficServiceGrpc.getCalculatePedestrianNumberMethod) == null) {
+          trafficServiceGrpc.getCalculatePedestrianNumberMethod = getCalculatePedestrianNumberMethod = 
+              io.grpc.MethodDescriptor.<grpc.trafficservice.Video, grpc.trafficservice.WarningResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "trafficservice.trafficService", "CalculatePedestrianNumber"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.trafficservice.Video.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.trafficservice.WarningResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new trafficServiceMethodDescriptorSupplier("CalculatePedestrianNumber"))
+                  .build();
+          }
+        }
+     }
+     return getCalculatePedestrianNumberMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -144,6 +176,17 @@ public final class trafficServiceGrpc {
       asyncUnimplementedUnaryCall(getLiveFeedMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Send information from the streets camera to the server
+     * client streaming
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<grpc.trafficservice.Video> calculatePedestrianNumber(
+        io.grpc.stub.StreamObserver<grpc.trafficservice.WarningResponse> responseObserver) {
+      return asyncUnimplementedStreamingCall(getCalculatePedestrianNumberMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -160,6 +203,13 @@ public final class trafficServiceGrpc {
                 grpc.trafficservice.Area,
                 grpc.trafficservice.StreetSituation>(
                   this, METHODID_LIVE_FEED)))
+          .addMethod(
+            getCalculatePedestrianNumberMethod(),
+            asyncClientStreamingCall(
+              new MethodHandlers<
+                grpc.trafficservice.Video,
+                grpc.trafficservice.WarningResponse>(
+                  this, METHODID_CALCULATE_PEDESTRIAN_NUMBER)))
           .build();
     }
   }
@@ -205,6 +255,18 @@ public final class trafficServiceGrpc {
         io.grpc.stub.StreamObserver<grpc.trafficservice.StreetSituation> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getLiveFeedMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Send information from the streets camera to the server
+     * client streaming
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<grpc.trafficservice.Video> calculatePedestrianNumber(
+        io.grpc.stub.StreamObserver<grpc.trafficservice.WarningResponse> responseObserver) {
+      return asyncClientStreamingCall(
+          getChannel().newCall(getCalculatePedestrianNumberMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -286,6 +348,7 @@ public final class trafficServiceGrpc {
 
   private static final int METHODID_SEND_EMERGENCY = 0;
   private static final int METHODID_LIVE_FEED = 1;
+  private static final int METHODID_CALCULATE_PEDESTRIAN_NUMBER = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -322,6 +385,9 @@ public final class trafficServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_CALCULATE_PEDESTRIAN_NUMBER:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.calculatePedestrianNumber(
+              (io.grpc.stub.StreamObserver<grpc.trafficservice.WarningResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -375,6 +441,7 @@ public final class trafficServiceGrpc {
               .setSchemaDescriptor(new trafficServiceFileDescriptorSupplier())
               .addMethod(getSendEmergencyMethod())
               .addMethod(getLiveFeedMethod())
+              .addMethod(getCalculatePedestrianNumberMethod())
               .build();
         }
       }
