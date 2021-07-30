@@ -109,8 +109,11 @@ public class TrafficServer {
 				public void onCompleted() {
 					WarningResponse.Builder response = WarningResponse.newBuilder();
 					
-					//send one message back
 					response.setText("Message from server, streaming from the camera now completed");
+					
+					//send one message back
+					responseObserver.onNext(response.build());
+					responseObserver.onCompleted();
 					
 				}
 			};
