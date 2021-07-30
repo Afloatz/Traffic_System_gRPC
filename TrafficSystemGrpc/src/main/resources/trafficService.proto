@@ -15,7 +15,7 @@ service trafficService {
 	// Server streaming: provide a live feed to the user on the current pedestrian traffic situation in a particular area.
     rpc LiveFeed(Area) returns (stream StreetSituation);
 
-    // Send information from the streets camera to the server
+    // Send information from the street camera at William Street to the server
     // client streaming
     rpc CalculatePedestrianNumber(stream Video) returns (WarningResponse);
 }
@@ -37,7 +37,7 @@ message StreetSituation {
 }
 
 message Video{
-  int32 pedestrianNumber = 1;
+  int32 pedestrianNumber = 1; // number of pedestrian walking in William Street
 }
 
 message WarningResponse {

@@ -3,7 +3,6 @@ package grpc.trafficservice;
 
 import java.io.IOException;
 
-import grpc.newservice.containsString;
 import grpc.trafficservice.trafficServiceGrpc.trafficServiceImplBase;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -90,12 +89,13 @@ public class TrafficServer {
 		// client streaming method
 		@Override
 		public StreamObserver<Video> calculatePedestrianNumber(StreamObserver<WarningResponse> responseObserver){
-			
+			System.out.println("inside streaming implementation");
 			return new StreamObserver<Video>() {
 
+				//send multiple messages
 				@Override
 				public void onNext(Video value) {
-					// TODO Auto-generated method stub
+					System.out.println("Receiving pedestrian numbers from client: " + value.getPedestrianNumber());
 					
 				}
 
@@ -107,7 +107,10 @@ public class TrafficServer {
 
 				@Override
 				public void onCompleted() {
-					// TODO Auto-generated method stub
+					WarningResponse.Builder response = WarningResponse.newBuilder();
+					
+					//send one message back
+					response.setText("Message from server, streaming from the camera now completed");
 					
 				}
 			};
