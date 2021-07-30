@@ -3,9 +3,11 @@ package grpc.trafficservice;
 import java.util.concurrent.TimeUnit;
 
 import grpc.trafficservice.trafficServiceGrpc.trafficServiceBlockingStub;
+import grpc.trafficservice.trafficServiceGrpc.trafficServiceStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
+import io.grpc.stub.StreamObserver;
 
 public class TrafficClient {
 	
@@ -22,14 +24,43 @@ public class TrafficClient {
 		//for unary -> need a BlockingStub
 		trafficServiceBlockingStub bStub = trafficServiceGrpc.newBlockingStub(trafficChannel);
 		
-		//now build our message
+		// async stub
+		trafficServiceStub asyncStub = trafficServiceGrpc.newStub(trafficChannel);
 		
 		try {
-			RequestEmergency rEmergency = RequestEmergency.newBuilder().setMessage("Emergency at Capel Street").build();
+			// code for the unary rpc -> put it in a separate method
+			//now build our message
+//			RequestEmergency rEmergency = RequestEmergency.newBuilder().setMessage("Emergency at Capel Street").build();
+//				
+//			// bring back the message from the server
+//			EmergencyResponse response = bStub.sendEmergency(rEmergency);
+//			System.out.println(response.getText());
+			
+			
+			// Code for the client streaming
+			StreamObserver<WarningResponse> responseObserver = new StreamObserver<WarningResponse>() {
+
+				@Override
+				public void onNext(WarningResponse value) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onError(Throwable t) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onCompleted() {
+					// TODO Auto-generated method stub
+					
+				}
 				
-			// bring back the message from the server
-			EmergencyResponse response = bStub.sendEmergency(rEmergency);
-			System.out.println(response.getText());
+			};
+			
+			
 			
 		} catch (StatusRuntimeException e) {
 			System.out.println(e.getMessage());
