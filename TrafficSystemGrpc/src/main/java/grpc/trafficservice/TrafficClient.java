@@ -54,11 +54,30 @@ public class TrafficClient {
 
 				@Override
 				public void onCompleted() {
-					// TODO Auto-generated method stub
-					
-				}
-				
+					System.out.println("stream completed, received data from the camera.");	
+				}				
 			};
+			
+			//create the message and send it to the server
+			StreamObserver<Video> requestObserver = asyncStub.calculatePedestrianNumber(responseObserver);
+			//1st data
+			requestObserver.onNext(Video.newBuilder().setPedestrianNumber(86).build());
+			Thread.sleep(500);
+			//2dn data
+			requestObserver.onNext(Video.newBuilder().setPedestrianNumber(189).build());
+			Thread.sleep(500);
+			
+			requestObserver.onNext(Video.newBuilder().setPedestrianNumber(152).build());
+			Thread.sleep(500);
+			
+			requestObserver.onNext(Video.newBuilder().setPedestrianNumber(140).build());
+			Thread.sleep(500);
+			
+			System.out.println("Sending data");
+			
+			requestObserver.onCompleted();
+			
+			Thread.sleep(5000); //pause our thread
 			
 			
 			
