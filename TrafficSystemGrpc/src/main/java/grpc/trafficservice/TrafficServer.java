@@ -91,6 +91,26 @@ public class TrafficServer {
 		@Override
 		public StreamObserver<Video> calculatePedestrianNumber(StreamObserver<WarningResponse> responseObserver){
 			
+			return new StreamObserver<Video>() {
+
+				@Override
+				public void onNext(Video value) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onError(Throwable t) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onCompleted() {
+					// TODO Auto-generated method stub
+					
+				}
+			};
 		}
 		
 	}
