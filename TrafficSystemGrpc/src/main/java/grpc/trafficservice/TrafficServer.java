@@ -3,6 +3,7 @@ package grpc.trafficservice;
 
 import java.io.IOException;
 
+import grpc.newservice.containsString;
 import grpc.trafficservice.trafficServiceGrpc.trafficServiceImplBase;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -24,7 +25,6 @@ public class TrafficServer {
 		System.out.println("Starting traffic Server");
 		
 		int port = 50051; // port number that we will use
-		// to run multiple services each needs their own port
 		
 		// use the builder to build the object for us
 		server = ServerBuilder.forPort(port).addService(new TrafficServerImpl()).build().start();
@@ -85,6 +85,12 @@ public class TrafficServer {
 		
 			responseObserver.onCompleted();
 		
+		}
+		
+		// client streaming method
+		@Override
+		public StreamObserver<Video> calculatePedestrianNumber(StreamObserver<WarningResponse> responseObserver){
+			
 		}
 		
 	}
