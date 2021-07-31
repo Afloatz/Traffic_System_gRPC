@@ -56,6 +56,18 @@ public class TrafficClient {
 		System.out.println(response.getText());	
 	}
 	
+	
+	// server streaming
+	public static void liveFeed() {
+		//prepare the request
+		Area requestArea = Area.newBuilder().setIntArea(1).build();
+		
+		//stream the responses
+		bStub.liveFeed(requestArea).forEachRemaining(StreetSituation -> {
+			System.out.println(StreetSituation.getTextSituation());
+		});
+	}
+	
 	// Code for the client streaming rpc
 	public static void calculatePedestrianNumber() throws InterruptedException {
 		
@@ -99,17 +111,6 @@ public class TrafficClient {
 		requestObserver.onCompleted();
 		
 		Thread.sleep(5000); //pause our thread		
-	}
-	
-	// server streaming
-	public static void liveFeed() {
-		//prepare the request
-		Area requestArea = Area.newBuilder().setIntArea(1).build();
-		
-		//stream the responses
-		bStub.liveFeed(requestArea).forEachRemaining(StreetSituation -> {
-			System.out.println(StreetSituation.getTextSituation());
-		});
 	}
 	
 

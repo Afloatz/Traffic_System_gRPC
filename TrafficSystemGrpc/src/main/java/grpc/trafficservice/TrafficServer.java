@@ -66,23 +66,32 @@ public class TrafficServer {
 			int intArea= request.getIntArea();
 			System.out.println("The Dublin district is: " + intArea);
 		
-			// Now build our response
-			StreetSituation.Builder response = StreetSituation.newBuilder(); // builder object
-		
-			// first response
-			response.setTextSituation("O'Connelll street is very busy with a lot of pedestrians on the road.");			
-			// Send out message (build our response)
-			responseObserver.onNext(response.build()); 
+
+			try {
+				// Now build our response
+				StreetSituation.Builder response = StreetSituation.newBuilder(); // builder object
 			
-			// second response that we are sending back to the client
-			response.setTextSituation("Parnell street is has not much pedestrian traffic at the moment.");			
-			responseObserver.onNext(response.build()); 
-			
-			// third response
-			response.setTextSituation("Avoid Bachelors Walk as a protest is happening!");			
-			responseObserver.onNext(response.build()); 
-		
-			responseObserver.onCompleted();
+				// first response
+				response.setTextSituation("O'Connelll street is very busy with a lot of pedestrians on the road.");			
+				// Send out message (build our response)
+				responseObserver.onNext(response.build()); 
+				Thread.sleep(1000);
+				
+				// second response that we are sending back to the client
+				response.setTextSituation("Parnell street is has not much pedestrian traffic at the moment.");			
+				responseObserver.onNext(response.build()); 
+				Thread.sleep(1000);
+				
+				// third response
+				response.setTextSituation("Avoid Bachelors Walk as a protest is happening!");			
+				responseObserver.onNext(response.build()); 
+				Thread.sleep(1000);
+				
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} finally {
+				responseObserver.onCompleted();
+			}					
 		
 		}
 		
