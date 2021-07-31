@@ -128,6 +128,40 @@ public class TrafficServer {
 			};
 		}
 		
+		
+		//bi-di
+		@Override
+		public StreamObserver<UserAlertRequest> streetAlert(StreamObserver<UserAlertResponse> responseObserver) {
+	
+			StreamObserver<UserAlertRequest> requestObserver = new StreamObserver<UserAlertRequest>() {
+
+				@Override
+				public void onNext(UserAlertRequest value) {
+					String responseLocation = "Alert at " +  value.getAlert().getLocation();
+					String responseMessage = value.getAlert().getMessage();
+					
+					UserAlertResponse userAlertResponse = UserAlertResponse.newBuilder()
+							.setResult(responseLocation + "\n" + responseMessage)
+							.build();
+					
+					responseObserver.onNext(userAlertResponse);
+					
+				}
+
+				@Override
+				public void onError(Throwable t) {
+					t.printStackTrace();
+					
+				}
+
+				@Override
+				public void onCompleted() {
+					responseObserver.onCompleted();					
+				}
+			};
+			return requestObserver;
+		}
+		
 	}
 
 }
