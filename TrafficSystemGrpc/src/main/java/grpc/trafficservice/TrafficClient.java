@@ -46,7 +46,7 @@ public class TrafficClient {
 			
 	}
 	
-	// code for the unary rpc
+	//  unary rpc
 	public static void sendEmergency() {
 		//now build our message
 		RequestEmergency rEmergency = RequestEmergency.newBuilder().setMessage("Emergency at Capel Street").build();
@@ -68,7 +68,7 @@ public class TrafficClient {
 		});
 	}
 	
-	// Code for the client streaming rpc
+	// client streaming rpc
 	public static void calculatePedestrianNumber() throws InterruptedException {
 		
 		StreamObserver<WarningResponse> responseObserver = new StreamObserver<WarningResponse>() {

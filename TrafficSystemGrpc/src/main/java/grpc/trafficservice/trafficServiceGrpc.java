@@ -126,6 +126,38 @@ public final class trafficServiceGrpc {
      return getCalculatePedestrianNumberMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<grpc.trafficservice.UserAlertRequest,
+      grpc.trafficservice.UserAlertResponse> getStreetAlertMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "StreetAlert",
+      requestType = grpc.trafficservice.UserAlertRequest.class,
+      responseType = grpc.trafficservice.UserAlertResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<grpc.trafficservice.UserAlertRequest,
+      grpc.trafficservice.UserAlertResponse> getStreetAlertMethod() {
+    io.grpc.MethodDescriptor<grpc.trafficservice.UserAlertRequest, grpc.trafficservice.UserAlertResponse> getStreetAlertMethod;
+    if ((getStreetAlertMethod = trafficServiceGrpc.getStreetAlertMethod) == null) {
+      synchronized (trafficServiceGrpc.class) {
+        if ((getStreetAlertMethod = trafficServiceGrpc.getStreetAlertMethod) == null) {
+          trafficServiceGrpc.getStreetAlertMethod = getStreetAlertMethod = 
+              io.grpc.MethodDescriptor.<grpc.trafficservice.UserAlertRequest, grpc.trafficservice.UserAlertResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "trafficservice.trafficService", "StreetAlert"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.trafficservice.UserAlertRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.trafficservice.UserAlertResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new trafficServiceMethodDescriptorSupplier("StreetAlert"))
+                  .build();
+          }
+        }
+     }
+     return getStreetAlertMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -187,6 +219,17 @@ public final class trafficServiceGrpc {
       return asyncUnimplementedStreamingCall(getCalculatePedestrianNumberMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Allow users to alert fellow users about the current traffic situation in popular areas
+     * bi-directional streaming
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<grpc.trafficservice.UserAlertRequest> streetAlert(
+        io.grpc.stub.StreamObserver<grpc.trafficservice.UserAlertResponse> responseObserver) {
+      return asyncUnimplementedStreamingCall(getStreetAlertMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -210,6 +253,13 @@ public final class trafficServiceGrpc {
                 grpc.trafficservice.Video,
                 grpc.trafficservice.WarningResponse>(
                   this, METHODID_CALCULATE_PEDESTRIAN_NUMBER)))
+          .addMethod(
+            getStreetAlertMethod(),
+            asyncBidiStreamingCall(
+              new MethodHandlers<
+                grpc.trafficservice.UserAlertRequest,
+                grpc.trafficservice.UserAlertResponse>(
+                  this, METHODID_STREET_ALERT)))
           .build();
     }
   }
@@ -267,6 +317,18 @@ public final class trafficServiceGrpc {
         io.grpc.stub.StreamObserver<grpc.trafficservice.WarningResponse> responseObserver) {
       return asyncClientStreamingCall(
           getChannel().newCall(getCalculatePedestrianNumberMethod(), getCallOptions()), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Allow users to alert fellow users about the current traffic situation in popular areas
+     * bi-directional streaming
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<grpc.trafficservice.UserAlertRequest> streetAlert(
+        io.grpc.stub.StreamObserver<grpc.trafficservice.UserAlertResponse> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(getStreetAlertMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -349,6 +411,7 @@ public final class trafficServiceGrpc {
   private static final int METHODID_SEND_EMERGENCY = 0;
   private static final int METHODID_LIVE_FEED = 1;
   private static final int METHODID_CALCULATE_PEDESTRIAN_NUMBER = 2;
+  private static final int METHODID_STREET_ALERT = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -388,6 +451,9 @@ public final class trafficServiceGrpc {
         case METHODID_CALCULATE_PEDESTRIAN_NUMBER:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.calculatePedestrianNumber(
               (io.grpc.stub.StreamObserver<grpc.trafficservice.WarningResponse>) responseObserver);
+        case METHODID_STREET_ALERT:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.streetAlert(
+              (io.grpc.stub.StreamObserver<grpc.trafficservice.UserAlertResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -442,6 +508,7 @@ public final class trafficServiceGrpc {
               .addMethod(getSendEmergencyMethod())
               .addMethod(getLiveFeedMethod())
               .addMethod(getCalculatePedestrianNumberMethod())
+              .addMethod(getStreetAlertMethod())
               .build();
         }
       }

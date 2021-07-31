@@ -18,6 +18,11 @@ service trafficService {
     // Send information from the street camera at William Street to the server
     // client streaming
     rpc CalculatePedestrianNumber(stream Video) returns (WarningResponse);
+
+    // Allow users to alert fellow users about the current traffic situation in popular areas
+    // bi-directional streaming
+    rpc StreetAlert (stream UserAlertRequest) returns (stream UserAlertResponse);
+
 }
 
 message RequestEmergency{
@@ -42,4 +47,17 @@ message Video{
 
 message WarningResponse {
   string text = 1;
+}
+
+message Alert {
+	string location = 1;
+	string message = 2;
+}
+
+message UserAlertRequest{
+	Alert alert = 1;
+}
+
+message UserAlertResponse{
+	string result = 1;
 }

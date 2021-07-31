@@ -44,6 +44,21 @@ public final class TrafficServiceImpl {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_trafficservice_WarningResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficservice_Alert_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficservice_Alert_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficservice_UserAlertRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficservice_UserAlertRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_trafficservice_UserAlertResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_trafficservice_UserAlertResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -59,14 +74,20 @@ public final class TrafficServiceImpl {
       "\n\007intArea\030\001 \001(\005\"(\n\017StreetSituation\022\025\n\rte" +
       "xtSituation\030\001 \001(\t\"!\n\005Video\022\030\n\020pedestrian" +
       "Number\030\001 \001(\005\"\037\n\017WarningResponse\022\014\n\004text\030" +
-      "\001 \001(\t2\202\002\n\016trafficService\022T\n\rsendEmergenc" +
-      "y\022 .trafficservice.RequestEmergency\032!.tr" +
-      "afficservice.EmergencyResponse\022C\n\010LiveFe" +
-      "ed\022\024.trafficservice.Area\032\037.trafficservic" +
-      "e.StreetSituation0\001\022U\n\031CalculatePedestri" +
-      "anNumber\022\025.trafficservice.Video\032\037.traffi" +
-      "cservice.WarningResponse(\001B+\n\023grpc.traff" +
-      "icserviceB\022TrafficServiceImplP\001b\006proto3"
+      "\001 \001(\t\"*\n\005Alert\022\020\n\010location\030\001 \001(\t\022\017\n\007mess" +
+      "age\030\002 \001(\t\"8\n\020UserAlertRequest\022$\n\005alert\030\001" +
+      " \001(\0132\025.trafficservice.Alert\"#\n\021UserAlert" +
+      "Response\022\016\n\006result\030\001 \001(\t2\332\002\n\016trafficServ" +
+      "ice\022T\n\rsendEmergency\022 .trafficservice.Re" +
+      "questEmergency\032!.trafficservice.Emergenc" +
+      "yResponse\022C\n\010LiveFeed\022\024.trafficservice.A" +
+      "rea\032\037.trafficservice.StreetSituation0\001\022U" +
+      "\n\031CalculatePedestrianNumber\022\025.trafficser" +
+      "vice.Video\032\037.trafficservice.WarningRespo" +
+      "nse(\001\022V\n\013StreetAlert\022 .trafficservice.Us" +
+      "erAlertRequest\032!.trafficservice.UserAler" +
+      "tResponse(\0010\001B+\n\023grpc.trafficserviceB\022Tr" +
+      "afficServiceImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -116,6 +137,24 @@ public final class TrafficServiceImpl {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_trafficservice_WarningResponse_descriptor,
         new java.lang.String[] { "Text", });
+    internal_static_trafficservice_Alert_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_trafficservice_Alert_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficservice_Alert_descriptor,
+        new java.lang.String[] { "Location", "Message", });
+    internal_static_trafficservice_UserAlertRequest_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_trafficservice_UserAlertRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficservice_UserAlertRequest_descriptor,
+        new java.lang.String[] { "Alert", });
+    internal_static_trafficservice_UserAlertResponse_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_trafficservice_UserAlertResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_trafficservice_UserAlertResponse_descriptor,
+        new java.lang.String[] { "Result", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
