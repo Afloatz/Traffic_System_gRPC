@@ -8,6 +8,10 @@ public interface VideoOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
+   * <pre>
+   * number of pedestrian walking in William Street
+   * </pre>
+   *
    * <code>int32 pedestrianNumber = 1;</code>
    */
   int getPedestrianNumber();

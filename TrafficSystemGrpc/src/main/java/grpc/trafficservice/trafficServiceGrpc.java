@@ -178,7 +178,7 @@ public final class trafficServiceGrpc {
 
     /**
      * <pre>
-     * Send information from the streets camera to the server
+     * Send information from the street camera at William Street to the server
      * client streaming
      * </pre>
      */
@@ -259,7 +259,7 @@ public final class trafficServiceGrpc {
 
     /**
      * <pre>
-     * Send information from the streets camera to the server
+     * Send information from the street camera at William Street to the server
      * client streaming
      * </pre>
      */

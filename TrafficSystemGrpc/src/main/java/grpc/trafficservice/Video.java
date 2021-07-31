@@ -83,6 +83,10 @@ private static final long serialVersionUID = 0L;
   public static final int PEDESTRIANNUMBER_FIELD_NUMBER = 1;
   private int pedestrianNumber_;
   /**
+   * <pre>
+   * number of pedestrian walking in William Street
+   * </pre>
+   *
    * <code>int32 pedestrianNumber = 1;</code>
    */
   public int getPedestrianNumber() {
@@ -394,12 +398,20 @@ private static final long serialVersionUID = 0L;
 
     private int pedestrianNumber_ ;
     /**
+     * <pre>
+     * number of pedestrian walking in William Street
+     * </pre>
+     *
      * <code>int32 pedestrianNumber = 1;</code>
      */
     public int getPedestrianNumber() {
       return pedestrianNumber_;
     }
     /**
+     * <pre>
+     * number of pedestrian walking in William Street
+     * </pre>
+     *
      * <code>int32 pedestrianNumber = 1;</code>
      */
     public Builder setPedestrianNumber(int value) {
@@ -409,6 +421,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     * number of pedestrian walking in William Street
+     * </pre>
+     *
      * <code>int32 pedestrianNumber = 1;</code>
      */
     public Builder clearPedestrianNumber() {
