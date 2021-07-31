@@ -33,7 +33,8 @@ public class TrafficClient {
 		try {		
 			
 			//sendEmergency();	
-			calculatePedestrianNumber();
+			liveFeed();
+			//calculatePedestrianNumber();
 			
 			
 		} catch (StatusRuntimeException e) {
@@ -98,6 +99,17 @@ public class TrafficClient {
 		requestObserver.onCompleted();
 		
 		Thread.sleep(5000); //pause our thread		
+	}
+	
+	// server streaming
+	public static void liveFeed() {
+		//prepare the request
+		Area requestArea = Area.newBuilder().setIntArea(1).build();
+		
+		//stream the responses
+		bStub.liveFeed(requestArea).forEachRemaining(StreetSituation -> {
+			System.out.println(StreetSituation.getTextSituation());
+		});
 	}
 	
 
