@@ -33,8 +33,9 @@ public class TrafficClient {
 		try {		
 			
 			//sendEmergency();	
-			liveFeed();
+			//liveFeed();
 			//calculatePedestrianNumber();
+			streetAlert();
 			
 			
 		} catch (StatusRuntimeException e) {
@@ -111,6 +112,44 @@ public class TrafficClient {
 		requestObserver.onCompleted();
 		
 		Thread.sleep(5000); //pause our thread		
+	}
+	
+	//bi-di rpc
+	public static void streetAlert() throws InterruptedException {
+				
+		StreamObserver<UserAlertRequest> requestObserver = asyncStub.streetAlert(new StreamObserver<UserAlertResponse>() {
+
+			@Override
+			public void onNext(UserAlertResponse value) {
+				System.out.println("Receiving alerts: " + value.getResult());
+				
+			}
+
+			@Override
+			public void onError(Throwable t) {
+				
+				
+			}
+
+			@Override
+			public void onCompleted() {
+				System.out.println("Server is done sending alerts");
+			}
+		});
+		
+		requestObserver.onNext(UserAlertRequest.newBuilder().setAlert(Alert.newBuilder().setLocation("Parnell Street").setMessage("Pedestrian lying on the road")).build());
+		Thread.sleep(500);
+		requestObserver.onNext(UserAlertRequest.newBuilder().setAlert(Alert.newBuilder().setLocation("Exchequer Street").setMessage("Careful, lot of people partying")).build());
+		Thread.sleep(500);
+		requestObserver.onNext(UserAlertRequest.newBuilder().setAlert(Alert.newBuilder().setLocation("Merrion Square W").setMessage("Protests in progress")).build());
+		Thread.sleep(500);
+		requestObserver.onNext(UserAlertRequest.newBuilder().setAlert(Alert.newBuilder().setLocation("George Street").setMessage("Street is overcrowded")).build());
+		Thread.sleep(500);
+		
+		requestObserver.onCompleted();
+		Thread.sleep(5000);
+
+	
 	}
 	
 
