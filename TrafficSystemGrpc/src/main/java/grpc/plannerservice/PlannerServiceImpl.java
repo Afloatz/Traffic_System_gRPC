@@ -38,12 +38,12 @@ public final class PlannerServiceImpl {
       "annerservice.DayRequest.DayOfTheWeek\"w\n\014" +
       "DayOfTheWeek\022\013\n\007UNKNOWN\020\000\022\n\n\006MONDAY\020\001\022\013\n" +
       "\007TUESDAY\020\002\022\r\n\tWEDNESDAY\020\003\022\014\n\010THURSDAY\020\004\022" +
-      "\n\n\006FRIDAY\020\005\022\014\n\010SATURDAY\020\006\022\n\n\006SUNDAY\020\007\"\"\n" +
-      "\016StreetResponse\022\020\n\010isClosed\030\001 \001(\0102f\n\016Pla" +
-      "nnerService\022T\n\024GetPedestrianStreets\022\032.pl" +
-      "annerservice.DayRequest\032\036.plannerservice" +
-      ".StreetResponse0\001B+\n\023grpc.plannerservice" +
-      "B\022PlannerServiceImplP\001b\006proto3"
+      "\n\n\006FRIDAY\020\005\022\014\n\010SATURDAY\020\006\022\n\n\006SUNDAY\020\007\"!\n" +
+      "\016StreetResponse\022\017\n\007message\030\001 \001(\t2f\n\016Plan" +
+      "nerService\022T\n\024GetPedestrianStreets\022\032.pla" +
+      "nnerservice.DayRequest\032\036.plannerservice." +
+      "StreetResponse0\001B+\n\023grpc.plannerserviceB" +
+      "\022PlannerServiceImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -68,7 +68,7 @@ public final class PlannerServiceImpl {
     internal_static_plannerservice_StreetResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_plannerservice_StreetResponse_descriptor,
-        new java.lang.String[] { "IsClosed", });
+        new java.lang.String[] { "Message", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

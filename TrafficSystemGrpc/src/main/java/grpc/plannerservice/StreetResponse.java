@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private StreetResponse() {
-    isClosed_ = false;
+    message_ = "";
   }
 
   @java.lang.Override
@@ -43,9 +43,10 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 8: {
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            isClosed_ = input.readBool();
+            message_ = s;
             break;
           }
           default: {
@@ -80,13 +81,38 @@ private static final long serialVersionUID = 0L;
             grpc.plannerservice.StreetResponse.class, grpc.plannerservice.StreetResponse.Builder.class);
   }
 
-  public static final int ISCLOSED_FIELD_NUMBER = 1;
-  private boolean isClosed_;
+  public static final int MESSAGE_FIELD_NUMBER = 1;
+  private volatile java.lang.Object message_;
   /**
-   * <code>bool isClosed = 1;</code>
+   * <code>string message = 1;</code>
    */
-  public boolean getIsClosed() {
-    return isClosed_;
+  public java.lang.String getMessage() {
+    java.lang.Object ref = message_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      message_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string message = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getMessageBytes() {
+    java.lang.Object ref = message_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      message_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -103,8 +129,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (isClosed_ != false) {
-      output.writeBool(1, isClosed_);
+    if (!getMessageBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, message_);
     }
     unknownFields.writeTo(output);
   }
@@ -115,9 +141,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (isClosed_ != false) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeBoolSize(1, isClosed_);
+    if (!getMessageBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, message_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -135,8 +160,8 @@ private static final long serialVersionUID = 0L;
     grpc.plannerservice.StreetResponse other = (grpc.plannerservice.StreetResponse) obj;
 
     boolean result = true;
-    result = result && (getIsClosed()
-        == other.getIsClosed());
+    result = result && getMessage()
+        .equals(other.getMessage());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -148,9 +173,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ISCLOSED_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-        getIsClosed());
+    hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+    hash = (53 * hash) + getMessage().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -284,7 +308,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      isClosed_ = false;
+      message_ = "";
 
       return this;
     }
@@ -312,7 +336,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public grpc.plannerservice.StreetResponse buildPartial() {
       grpc.plannerservice.StreetResponse result = new grpc.plannerservice.StreetResponse(this);
-      result.isClosed_ = isClosed_;
+      result.message_ = message_;
       onBuilt();
       return result;
     }
@@ -361,8 +385,9 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(grpc.plannerservice.StreetResponse other) {
       if (other == grpc.plannerservice.StreetResponse.getDefaultInstance()) return this;
-      if (other.getIsClosed() != false) {
-        setIsClosed(other.getIsClosed());
+      if (!other.getMessage().isEmpty()) {
+        message_ = other.message_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -393,28 +418,71 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private boolean isClosed_ ;
+    private java.lang.Object message_ = "";
     /**
-     * <code>bool isClosed = 1;</code>
+     * <code>string message = 1;</code>
      */
-    public boolean getIsClosed() {
-      return isClosed_;
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        message_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
-     * <code>bool isClosed = 1;</code>
+     * <code>string message = 1;</code>
      */
-    public Builder setIsClosed(boolean value) {
-      
-      isClosed_ = value;
+    public com.google.protobuf.ByteString
+        getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string message = 1;</code>
+     */
+    public Builder setMessage(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      message_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>bool isClosed = 1;</code>
+     * <code>string message = 1;</code>
      */
-    public Builder clearIsClosed() {
+    public Builder clearMessage() {
       
-      isClosed_ = false;
+      message_ = getDefaultInstance().getMessage();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string message = 1;</code>
+     */
+    public Builder setMessageBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      message_ = value;
       onChanged();
       return this;
     }

@@ -8,7 +8,12 @@ public interface StreetResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>bool isClosed = 1;</code>
+   * <code>string message = 1;</code>
    */
-  boolean getIsClosed();
+  java.lang.String getMessage();
+  /**
+   * <code>string message = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getMessageBytes();
 }

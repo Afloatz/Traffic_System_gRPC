@@ -33,5 +33,5 @@ message DayRequest {
 
 
 message StreetResponse {
-	bool isClosed = 1;
+	string message = 1;
 }
