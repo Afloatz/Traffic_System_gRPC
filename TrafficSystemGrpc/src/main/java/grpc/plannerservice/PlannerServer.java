@@ -25,7 +25,7 @@ public class PlannerServer {
 		int port = 50052; // port number that we will use for this planner service 
 		
 		// use the builder to build the object for us
-		// server = ServerBuilder.forPort(port).addService(new PlannerServerImpl()).build().start();
+		server = ServerBuilder.forPort(port).addService(new PlannerServerImpl()).build().start();
 		
 		System.out.println("Server running on port: " + port);
 		
@@ -33,39 +33,113 @@ public class PlannerServer {
 	}
 	
 	// Extend abstract base class for our implementation
-//	static class PlannerServerImpl extends PlannerServiceImplBase{
-//		
-//		// Server streaming method
-//		@Override
-//		public void getPedestrianStreets(DayRequest request, StreamObserver<StreetResponse> responseObserver) {
-//			System.out.println("receiving day: " + request.getDayOfTheWeek());		
-//			
-//			try {				
-//				// Now build our response
-//				StreetResponse.Builder response = StreetResponse.newBuilder(); // builder object
-//				
-//				switch (request.getDayOfTheWeek()) {
-//				case MONDAY:
-//					// first response
-//					response.setIsClosed(false);	
-//					// Send out message (build our response)
-//					responseObserver.onNext(response.build()); 
-//					Thread.sleep(1000);
-//					
-//					break;
-//
-//				default:
-//					break;
-//				}
-//				
-//			} catch (Exception e) {
-//				// TODO: handle exception
-//			} finally {
-//				
-//			}
-//			
-//		}
-//		
-//	}
+	static class PlannerServerImpl extends PlannerServiceImplBase{
+		
+		// Server streaming method
+		@Override
+		public void getPedestrianStreets(DayRequest request, StreamObserver<StreetResponse> responseObserver) {
+			System.out.println("receiving day: " + request.getDayOfTheWeek());		
+			
+			try {				
+				// Now build our response
+				StreetResponse.Builder response = StreetResponse.newBuilder(); // builder object
+				
+				switch (request.getDayOfTheWeek()) {
+				case MONDAY:
+					// first response
+					response.setMessage("O'Connell Street is pedestrian only today.");	
+					// Send out message (build our response)
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+					
+					// second response
+					response.setMessage("Parnell Street is pedestrian only today.");
+					// Send out message (build our response)
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);				
+					break;
+				case TUESDAY:
+					response.setMessage("William Street is pedestrian only today.");	
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+
+					response.setMessage("George Street is pedestrian only today.");
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);				
+					break;
+				case WEDNESDAY:
+					response.setMessage("Capel Street is pedestrian only today.");	
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+					
+					response.setMessage("Max Street is pedestrian only today.");
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);				
+
+					response.setMessage("John Street is pedestrian only today.");
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);				
+					break;					
+				case THURSDAY:
+					response.setMessage("Herbert Street is pedestrian only today.");	
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+
+					response.setMessage("Henry Street is pedestrian only today.");
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);				
+					break;
+				case FRIDAY:
+					response.setMessage("Herbert Street is pedestrian only today.");	
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+					
+					response.setMessage("Henry Street is pedestrian only today.");
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);				
+					break;
+				case SATURDAY:
+					response.setMessage("Capel Street is pedestrian only today.");	
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+					
+					response.setMessage("St Stephen Street is pedestrian only today.");
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);				
+					
+					response.setMessage("Merrion Square W is pedestrian only today.");
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);				
+					break;
+				case SUNDAY:
+					response.setMessage("John Street is pedestrian only today.");	
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+					
+					response.setMessage("Fitz Street is pedestrian only today.");
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);				
+					
+					response.setMessage("Arnold Street is pedestrian only today.");
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);				
+					break;			
+				default:
+					response.setMessage("Choose a day of the week!");
+					// Send out message (build our response)
+					responseObserver.onNext(response.build()); 			
+					break;
+				}
+				
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} finally {
+				responseObserver.onCompleted();
+				
+			}
+			
+		}
+		
+	}
 
 }
