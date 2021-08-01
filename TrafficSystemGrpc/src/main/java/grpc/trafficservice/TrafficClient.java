@@ -32,6 +32,7 @@ public class TrafficClient {
 		
 		try {		
 			
+			// Uncomment the service that you want to use:
 			//sendEmergency();	
 			//liveFeed();
 			//calculatePedestrianNumber();
@@ -121,14 +122,12 @@ public class TrafficClient {
 
 			@Override
 			public void onNext(UserAlertResponse value) {
-				System.out.println("Receiving alerts: " + value.getResult());
-				
+				System.out.println("Receiving alerts: " + value.getResult());				
 			}
 
 			@Override
 			public void onError(Throwable t) {
-				
-				
+				t.printStackTrace();				
 			}
 
 			@Override
