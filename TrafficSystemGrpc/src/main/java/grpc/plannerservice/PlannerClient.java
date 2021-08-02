@@ -2,10 +2,8 @@ package grpc.plannerservice;
 
 import java.util.concurrent.TimeUnit;
 
-import grpc.plannerservice.DayRequest.Builder;
 import grpc.plannerservice.DayRequest.DayOfTheWeek;
 import grpc.plannerservice.PlannerServiceGrpc.PlannerServiceBlockingStub;
-import grpc.plannerservice.PlannerServiceGrpc.PlannerServiceStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
@@ -13,7 +11,6 @@ import io.grpc.StatusRuntimeException;
 public class PlannerClient {
 	
 	private static PlannerServiceBlockingStub bStub;
-	private static PlannerServiceStub asyncStub;
 	
 	public static void main(String[] args) throws InterruptedException {
 		//Build a channel (to connect the server and client)
@@ -27,8 +24,7 @@ public class PlannerClient {
 		//for unary -> need a BlockingStub
 		bStub = PlannerServiceGrpc.newBlockingStub(plannerChannel);
 		
-		// async stub
-		asyncStub = PlannerServiceGrpc.newStub(plannerChannel);
+		PlannerServiceGrpc.newStub(plannerChannel);
 		
 		try {		
 			getPedestrianStreets();
@@ -37,8 +33,7 @@ public class PlannerClient {
 			System.out.println(e.getMessage());
 		} finally {
 			plannerChannel.shutdown().awaitTermination(5, TimeUnit.SECONDS);			
-		}
-		
+		}	
 		
 	}
 	
