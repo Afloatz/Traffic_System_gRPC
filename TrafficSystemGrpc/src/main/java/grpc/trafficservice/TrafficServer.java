@@ -2,6 +2,7 @@ package grpc.trafficservice;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import grpc.trafficservice.trafficServiceGrpc.trafficServiceImplBase;
 import io.grpc.Server;
@@ -98,36 +99,57 @@ public class TrafficServer {
 		// client streaming method
 		@Override
 		public StreamObserver<Video> calculatePedestrianNumber(StreamObserver<WarningResponse> responseObserver){
+			
 			System.out.println("inside streaming implementation");
-			return new StreamObserver<Video>() {
+			
+			return new StreamObserver<Video>() {		
+				ArrayList<Integer> pedestrians = new ArrayList<Integer>();
 
-				//send multiple messages
 				@Override
 				public void onNext(Video value) {
 					System.out.println("Receiving pedestrian numbers from client: " + value.getPedestrianNumber());
-					
+					//store the values received from the camera in the ArrayList
+					pedestrians.add(value.getPedestrianNumber());
 				}
 
 				@Override
 				public void onError(Throwable t) {
-					// TODO Auto-generated method stub
+					t.printStackTrace();
 					
 				}
 
 				@Override
 				public void onCompleted() {
+					
+					System.out.println("Message from server: streaming from the camera now completed");
+					
+					//calculate the current number of pedestrian in the street
+					int sum = 0;
+					for(int i = 0; i < pedestrians.size(); i++) {
+						sum += pedestrians.get(i);
+					} 
+																							
+					String reply = "";
+					
+					if (sum > 400) {
+						//if the number of pedestrian currently in the street is more then 400, send a warning
+						reply = "Warning, be careful while driving, the street has currently more pedestrians than its capacity!";
+					} else {
+						reply = "You can safely drive in the street";
+					}
+					
 					WarningResponse.Builder response = WarningResponse.newBuilder();
-					
-					response.setText("Message from server, streaming from the camera now completed");
-					
+					response.setText(reply);
 					//send one message back
 					responseObserver.onNext(response.build());
 					responseObserver.onCompleted();
 					
+					
 				}
 			};
 		}
-		
+	
+	
 		
 		//bi-di
 		@Override

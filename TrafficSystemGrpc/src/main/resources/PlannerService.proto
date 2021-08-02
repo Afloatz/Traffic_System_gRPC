@@ -11,7 +11,7 @@ service PlannerService{
 
 	// server streaming
     // Alert users of changes in street situations, such as pedestrian-only on certain days
-    // several responses (ex: Monday -> street1 closed, street2 closed, street3 open)
+    // several responses (ex: Monday -> street1 closed, street2 closed)
     rpc GetPedestrianStreets (DayRequest) returns (stream StreetResponse);
 
 }
@@ -30,7 +30,6 @@ message DayRequest {
 	DayOfTheWeek dayOfTheWeek = 1;
 
 }
-
 
 message StreetResponse {
 	string message = 1;

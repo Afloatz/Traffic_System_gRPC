@@ -35,8 +35,8 @@ public class TrafficClient {
 			// Uncomment the service that you want to use:
 			//sendEmergency();	
 			//liveFeed();
-			//calculatePedestrianNumber();
-			streetAlert();
+			calculatePedestrianNumber();
+			//streetAlert();
 			
 			
 		} catch (StatusRuntimeException e) {
@@ -97,16 +97,16 @@ public class TrafficClient {
 		StreamObserver<Video> requestObserver = asyncStub.calculatePedestrianNumber(responseObserver);
 		//1st data
 		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(86).build());
-		Thread.sleep(500);
+		//Thread.sleep(500);
 		//2dn data
 		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(189).build());
-		Thread.sleep(500);
+		//Thread.sleep(500);
 		
 		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(152).build());
-		Thread.sleep(500);
+		//Thread.sleep(500);
 		
 		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(140).build());
-		Thread.sleep(500);
+		//Thread.sleep(500);
 		
 		System.out.println("Sending data");
 		
@@ -137,13 +137,13 @@ public class TrafficClient {
 		});
 		
 		requestObserver.onNext(UserAlertRequest.newBuilder().setAlert(Alert.newBuilder().setLocation("Parnell Street").setMessage("Pedestrian lying on the road")).build());
-		Thread.sleep(500);
+		//Thread.sleep(500);
 		requestObserver.onNext(UserAlertRequest.newBuilder().setAlert(Alert.newBuilder().setLocation("Exchequer Street").setMessage("Careful, lot of people partying")).build());
-		Thread.sleep(500);
+		//Thread.sleep(500);
 		requestObserver.onNext(UserAlertRequest.newBuilder().setAlert(Alert.newBuilder().setLocation("Merrion Square W").setMessage("Protests in progress")).build());
-		Thread.sleep(500);
+		//Thread.sleep(500);
 		requestObserver.onNext(UserAlertRequest.newBuilder().setAlert(Alert.newBuilder().setLocation("George Street").setMessage("Street is overcrowded")).build());
-		Thread.sleep(500);
+		//Thread.sleep(500);
 		
 		requestObserver.onCompleted();
 		Thread.sleep(5000);
