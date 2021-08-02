@@ -22,7 +22,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.15.0)",
-    comments = "Source: PlannerService.proto")
+    comments = "Source: plannerService.proto")
 public final class PlannerServiceGrpc {
 
   private PlannerServiceGrpc() {}
@@ -96,7 +96,7 @@ public final class PlannerServiceGrpc {
      * <pre>
      * server streaming
      * Alert users of changes in street situations, such as pedestrian-only on certain days
-     * several responses (ex: Monday -&gt; street1 closed, street2 closed, street3 open)
+     * several responses (ex: Monday -&gt; street1 closed, street2 closed)
      * </pre>
      */
     public void getPedestrianStreets(grpc.plannerservice.DayRequest request,
@@ -142,7 +142,7 @@ public final class PlannerServiceGrpc {
      * <pre>
      * server streaming
      * Alert users of changes in street situations, such as pedestrian-only on certain days
-     * several responses (ex: Monday -&gt; street1 closed, street2 closed, street3 open)
+     * several responses (ex: Monday -&gt; street1 closed, street2 closed)
      * </pre>
      */
     public void getPedestrianStreets(grpc.plannerservice.DayRequest request,
@@ -177,7 +177,7 @@ public final class PlannerServiceGrpc {
      * <pre>
      * server streaming
      * Alert users of changes in street situations, such as pedestrian-only on certain days
-     * several responses (ex: Monday -&gt; street1 closed, street2 closed, street3 open)
+     * several responses (ex: Monday -&gt; street1 closed, street2 closed)
      * </pre>
      */
     public java.util.Iterator<grpc.plannerservice.StreetResponse> getPedestrianStreets(
