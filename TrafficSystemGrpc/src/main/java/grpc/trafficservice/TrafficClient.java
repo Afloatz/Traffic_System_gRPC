@@ -62,7 +62,7 @@ public class TrafficClient {
 	// server streaming
 	public static void liveFeed() {
 		//prepare the request
-		Area requestArea = Area.newBuilder().setIntArea(1).build();
+		Area requestArea = Area.newBuilder().setIntArea(4).build();
 		
 		//stream the responses
 		bStub.liveFeed(requestArea).forEachRemaining(StreetSituation -> {

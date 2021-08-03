@@ -31,9 +31,7 @@ public class TrafficServer {
 		
 		System.out.println("Server running on port: " + port);
 		
-		server.awaitTermination();
-	
-	
+		server.awaitTermination();		
 	}
 	
 	// Extend abstract base class for our implementation
@@ -71,22 +69,40 @@ public class TrafficServer {
 			try {
 				// Now build our response
 				StreetSituation.Builder response = StreetSituation.newBuilder(); // builder object
-			
-				// first response
-				response.setTextSituation("O'Connelll street is very busy with a lot of pedestrians on the road.");			
-				// Send out message (build our response)
-				responseObserver.onNext(response.build()); 
-				Thread.sleep(1000);
 				
-				// second response that we are sending back to the client
-				response.setTextSituation("Parnell street is has not much pedestrian traffic at the moment.");			
-				responseObserver.onNext(response.build()); 
-				Thread.sleep(1000);
-				
-				// third response
-				response.setTextSituation("Avoid Bachelors Walk as a protest is happening!");			
-				responseObserver.onNext(response.build()); 
-				Thread.sleep(1000);
+				// Provides different livefeed depending on the area (Dublin 1 to 22)
+				// Note: for this project I only entered responses for Dublin 1 and 2 to avoid entering 22 different set of responses
+				switch (intArea) {
+				case 1: //Dublin 1
+					// first response
+					response.setTextSituation("O'Connelll street is very busy with a lot of pedestrians on the road.");			
+					// Send out message (build our response)
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+					
+					// second response that we are sending back to the client
+					response.setTextSituation("Parnell street is has not much pedestrian traffic at the moment.");			
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+					
+					// third response
+					response.setTextSituation("Avoid Bachelors Walk as a protest is happening!");			
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);					
+					break;
+				case 2: //Dublin 2
+					response.setTextSituation("Exchequer Street is very busy.");			
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+					
+					response.setTextSituation("Dame Street has an emergency situation.");			
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+				default:
+					response.setTextSituation("Please enter a valid district number for Dublin (1 or 2)");			
+					responseObserver.onNext(response.build()); 
+					break;
+				}	
 				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -142,14 +158,10 @@ public class TrafficServer {
 					response.setText(reply);
 					//send one message back
 					responseObserver.onNext(response.build());
-					responseObserver.onCompleted();
-					
-					
+					responseObserver.onCompleted();										
 				}
 			};
 		}
-	
-	
 		
 		//bi-di
 		@Override
@@ -166,14 +178,12 @@ public class TrafficServer {
 							.setResult(responseLocation + "\n" + responseMessage)
 							.build();
 					
-					responseObserver.onNext(userAlertResponse);
-					
+					responseObserver.onNext(userAlertResponse);					
 				}
 
 				@Override
 				public void onError(Throwable t) {
-					t.printStackTrace();
-					
+					t.printStackTrace();					
 				}
 
 				@Override
