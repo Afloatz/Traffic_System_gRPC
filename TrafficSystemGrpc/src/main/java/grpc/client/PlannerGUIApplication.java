@@ -174,12 +174,10 @@ public class PlannerGUIApplication {
 					} else {
 						textResponse2.append("\n" + DiningStreetResponse.getStreetName() +": no outdoor dining at this time");
 					}
-				});
-				
-				
-
+				});								
 			}
 		});
+		
 		panel_service_1.add(btnSend2);
 		
 		textResponse2 = new JTextArea(5, 30); //construct a new text area for the server streaming response
