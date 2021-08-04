@@ -14,10 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import grpc.plannerservice.DayRequest.DayOfTheWeek;
 import grpc.plannerservice.DayRequest;
 import grpc.plannerservice.PlannerServiceGrpc;
+import grpc.plannerservice.TimeRequest;
 import grpc.plannerservice.PlannerServiceGrpc.PlannerServiceBlockingStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -27,7 +29,8 @@ public class PlannerGUIApplication {
 	private static PlannerServiceBlockingStub blockingStub;
 	
 	private JFrame frame;
-	private JTextArea textResponse; //text area to put the response into
+	private JTextField textNumber; 
+	private JTextArea textResponse, textResponse2; //text area to put the response into
 
 	/**
 	 * Launch the application.
@@ -74,7 +77,7 @@ public class PlannerGUIApplication {
 	private void initialize() {
 		frame = new JFrame(); 
 		frame.setTitle("Planner Client - Service Controller");
-		frame.setBounds(100, 100, 500, 300); //where the window will be and its size
+		frame.setBounds(100, 100, 400, 500); //where the window will be and its size
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		BoxLayout bl = new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS);
@@ -135,5 +138,56 @@ public class PlannerGUIApplication {
 		JScrollPane scrollPane = new JScrollPane(textResponse);
 		
 		panel_service_1.add(scrollPane);
+		
+		/**
+		 * //SERVER STREAMING RPC GetDiningStreets 
+		 */
+		
+		JLabel lblNewLabel_2 = new JLabel(" Enter the time (24hrs) ");
+		panel_service_1.add(lblNewLabel_2);
+		
+		//Input textbox (associated with the label we have a text field)
+		textNumber = new JTextField();
+		panel_service_1.add(textNumber);
+		//how wide should input box be?
+		textNumber.setColumns(10);
+			
+		
+		JButton btnSend2 = new JButton("Show streets having outdoor dining or not");
+		
+		//add an action listener to our 2nd button
+		btnSend2.addActionListener(new ActionListener() {
+			
+			//this will happen when the button is clicked
+			public void actionPerformed(ActionEvent e) {
+							
+				//retrieve data from GUI 
+				float num = Float.parseFloat(textNumber.getText());
+					
+				//talk to the server
+				TimeRequest request = TimeRequest.newBuilder().setTime(num).build();
+				
+				//Populate the GUI with the response
+				blockingStub.getDiningStreets(request).forEachRemaining(DiningStreetResponse -> {				
+					if (DiningStreetResponse.getHasOutdoorDining()) {
+						textResponse2.append("\n" + DiningStreetResponse.getStreetName() + ": has outdoor dining.");			
+					} else {
+						textResponse2.append("\n" + DiningStreetResponse.getStreetName() +": no outdoor dining at this time");
+					}
+				});
+				
+				
+
+			}
+		});
+		panel_service_1.add(btnSend2);
+		
+		textResponse2 = new JTextArea(5, 30); //construct a new text area for the server streaming response
+		textResponse2.setLineWrap(true);
+		textResponse2.setWrapStyleWord(true);
+		
+		JScrollPane scrollPane2 = new JScrollPane(textResponse2);
+		
+		panel_service_1.add(scrollPane2);
 	}
 }
