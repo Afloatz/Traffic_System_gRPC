@@ -25,14 +25,12 @@ public class TrafficClient {
 		ManagedChannel trafficChannel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
 	
 		//Create a stub, pass the channel to the stub
-		//for unary -> need a BlockingStub
-		bStub = trafficServiceGrpc.newBlockingStub(trafficChannel);
-		
-		// async stub
+		bStub = trafficServiceGrpc.newBlockingStub(trafficChannel);	
+		//async stub
 		asyncStub = trafficServiceGrpc.newStub(trafficChannel);
 		
 		try {					
-			// Uncomment the service that you want to use:
+			// Uncomment the rpc that you want to use:
 			//sendEmergency();	
 			//liveFeed();
 			//calculatePedestrianNumber();

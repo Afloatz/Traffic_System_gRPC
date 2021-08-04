@@ -21,13 +21,15 @@ public class PlannerClient {
 		ManagedChannel plannerChannel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
 	
 		//Create a stub, pass the channel to the stub
-		//for unary -> need a BlockingStub
 		bStub = PlannerServiceGrpc.newBlockingStub(plannerChannel);
 		
 		PlannerServiceGrpc.newStub(plannerChannel);
 		
 		try {		
-			getPedestrianStreets();
+			// Uncomment the rpc that you want to use:
+			//getPedestrianStreets();
+			getDiningStreets();
+			
 				
 		} catch (StatusRuntimeException e) {
 			System.out.println(e.getMessage());
@@ -45,6 +47,22 @@ public class PlannerClient {
 		//stream the responses
 		bStub.getPedestrianStreets(requestDay).forEachRemaining(StreetResponse -> {
 			System.out.println(StreetResponse.getMessage());
+		});
+	}
+	
+	// server streaming for rpc 2
+	public static void getDiningStreets() {
+		//prepare the request
+		TimeRequest request = TimeRequest.newBuilder().setTime(12f).build();
+		
+		//stream the responses
+		System.out.println("List of streets having or not outdoor dining at the time you selected: ");
+		bStub.getDiningStreets(request).forEachRemaining(DiningStreetResponse -> {
+			if (DiningStreetResponse.getHasOutdoorDining()) {
+				System.out.println(DiningStreetResponse.getStreetName() + ": has outdoor dining.");			
+			} else {
+				System.out.println(DiningStreetResponse.getStreetName() +": no outdoor dining at this time");
+			}
 		});
 	}
 
