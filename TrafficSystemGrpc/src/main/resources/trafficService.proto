@@ -17,6 +17,7 @@ service trafficService {
     rpc LiveFeed(Area) returns (stream StreetSituation);
 
     // Send information from the street camera at William Street to the server
+    // then warning message will be displayed on the road sign traffic information screen
     // client streaming
     rpc CalculatePedestrianNumber(stream Video) returns (WarningResponse);
 

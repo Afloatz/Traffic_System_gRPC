@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,20 +18,25 @@ import javax.swing.JTextField;
 import grpc.trafficservice.Area;
 import grpc.trafficservice.EmergencyResponse;
 import grpc.trafficservice.RequestEmergency;
+import grpc.trafficservice.Video;
+import grpc.trafficservice.WarningResponse;
 import grpc.trafficservice.trafficServiceGrpc;
 import grpc.trafficservice.trafficServiceGrpc.trafficServiceBlockingStub;
+import grpc.trafficservice.trafficServiceGrpc.trafficServiceStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.StreamObserver;
 
 
 
 public class MainGUIApplication {
 	
 	private static trafficServiceBlockingStub blockingStub;
+	private static trafficServiceStub asyncStub;
 	
 	private JFrame frame;
 	private JTextField textLocation, textNumber; //text field is declared here
-	private JTextArea textResponse, textResponse2 ; //text area to put the response into
+	private JTextArea textResponse, textResponse2, textResponse3 ; //text area to put the response into
 
 	/**
 	 * Launch the application.
@@ -64,6 +70,7 @@ public class MainGUIApplication {
 				.build();
 		
 		blockingStub = trafficServiceGrpc.newBlockingStub(channel);
+		asyncStub = trafficServiceGrpc.newStub(channel);
 		
 		initialize(); //defined below
 		
@@ -76,7 +83,7 @@ public class MainGUIApplication {
 	private void initialize() {
 		frame = new JFrame(); 
 		frame.setTitle("Traffic Client - Service Controller");
-		frame.setBounds(100, 100, 500, 300); //where the window will be and its size
+		frame.setBounds(100, 100, 500, 500); //where the window will be and its size
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		BoxLayout bl = new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS);
@@ -181,5 +188,76 @@ public class MainGUIApplication {
 		
 		panel_service_1.add(scrollPane2);
 		
+		
+		/**
+		 * //CLIENT STREAMING RPC CalculatePedestrianNumber
+		 */
+						
+		JButton btnSend3 = new JButton("Get foot traffic situation");
+		
+		//add an action listener to our 3rd button
+		btnSend3.addActionListener(new ActionListener() {
+			
+			//this will happen when the button is clicked
+			public void actionPerformed(ActionEvent e) {
+							
+				//no data to retrieve from GUI since the client in that case is a remote device (a camera with a screen to display the response)
+				
+				StreamObserver<WarningResponse> responseObserver = new StreamObserver<WarningResponse>() {
+
+					@Override
+					public void onNext(WarningResponse value) {
+						// print the response from the server on the console
+						System.out.println("Response: " + value.getText());	
+						//Populate the GUI with the response
+						textResponse3.append("\nReply: " + value.getText());	
+					}
+
+					@Override
+					public void onError(Throwable t) {
+						t.printStackTrace();			
+					}
+
+					@Override
+					public void onCompleted() {
+						System.out.println("stream completed, received data from the camera.");	
+					}				
+				};
+				
+				//generate random numbers that represents the number of people currently in the street
+				Random myRan = new Random();
+				int randomNumber1 = myRan.nextInt(100); // 0, 1, 2, ..., 98, 99
+				int randomNumber2 = myRan.nextInt(200);
+				int randomNumber3 = myRan.nextInt(50);
+				int randomNumber4 = myRan.nextInt(400);
+				
+				//create the message and send it to the server
+				StreamObserver<Video> requestObserver = asyncStub.calculatePedestrianNumber(responseObserver);
+				//1st data
+				requestObserver.onNext(Video.newBuilder().setPedestrianNumber(randomNumber1).build());				
+				//2dn data
+				requestObserver.onNext(Video.newBuilder().setPedestrianNumber(randomNumber2).build());
+								
+				requestObserver.onNext(Video.newBuilder().setPedestrianNumber(randomNumber3).build());				
+				
+				requestObserver.onNext(Video.newBuilder().setPedestrianNumber(randomNumber4).build());		
+				
+				System.out.println("Sending data");
+				
+				requestObserver.onCompleted();						
+			}
+		});
+		panel_service_1.add(btnSend3);
+		
+		textResponse3 = new JTextArea(5, 30); //construct a new text area for the server streaming response
+		textResponse3.setLineWrap(true);
+		textResponse3.setWrapStyleWord(true);
+		
+		JScrollPane scrollPane3 = new JScrollPane(textResponse3);
+		
+		panel_service_1.add(scrollPane3);
+		
 	}
+	
+	
 }
