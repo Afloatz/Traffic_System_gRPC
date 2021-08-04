@@ -73,14 +73,13 @@ public class TrafficClient {
 
 			@Override
 			public void onNext(WarningResponse value) {
-				// TODO Auto-generated method stub
-				
+				// print the response from the server
+				System.out.println("Response: " + value.getText());				
 			}
 
 			@Override
 			public void onError(Throwable t) {
-				t.printStackTrace();
-				
+				t.printStackTrace();			
 			}
 
 			@Override

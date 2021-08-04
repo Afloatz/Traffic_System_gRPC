@@ -98,7 +98,7 @@ public class TrafficServer {
 					response.setTextSituation("Dame Street has an emergency situation.");			
 					responseObserver.onNext(response.build()); 
 					Thread.sleep(1000);
-				default:
+				default: //if the user enters a wrong input (not supported district number)
 					response.setTextSituation("Please enter a valid district number for Dublin (1 or 2)");			
 					responseObserver.onNext(response.build()); 
 					break;
