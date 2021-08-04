@@ -212,6 +212,7 @@ public final class trafficServiceGrpc {
     /**
      * <pre>
      * Send information from the street camera at William Street to the server
+     * then warning message will be displayed on the road sign traffic information screen
      * client streaming
      * </pre>
      */
@@ -312,6 +313,7 @@ public final class trafficServiceGrpc {
     /**
      * <pre>
      * Send information from the street camera at William Street to the server
+     * then warning message will be displayed on the road sign traffic information screen
      * client streaming
      * </pre>
      */

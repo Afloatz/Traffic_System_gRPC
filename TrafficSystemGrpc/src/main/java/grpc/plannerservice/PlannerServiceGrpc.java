@@ -62,6 +62,38 @@ public final class PlannerServiceGrpc {
      return getGetPedestrianStreetsMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<grpc.plannerservice.TimeRequest,
+      grpc.plannerservice.DiningStreetResponse> getGetDiningStreetsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetDiningStreets",
+      requestType = grpc.plannerservice.TimeRequest.class,
+      responseType = grpc.plannerservice.DiningStreetResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<grpc.plannerservice.TimeRequest,
+      grpc.plannerservice.DiningStreetResponse> getGetDiningStreetsMethod() {
+    io.grpc.MethodDescriptor<grpc.plannerservice.TimeRequest, grpc.plannerservice.DiningStreetResponse> getGetDiningStreetsMethod;
+    if ((getGetDiningStreetsMethod = PlannerServiceGrpc.getGetDiningStreetsMethod) == null) {
+      synchronized (PlannerServiceGrpc.class) {
+        if ((getGetDiningStreetsMethod = PlannerServiceGrpc.getGetDiningStreetsMethod) == null) {
+          PlannerServiceGrpc.getGetDiningStreetsMethod = getGetDiningStreetsMethod = 
+              io.grpc.MethodDescriptor.<grpc.plannerservice.TimeRequest, grpc.plannerservice.DiningStreetResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "plannerservice.PlannerService", "GetDiningStreets"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.plannerservice.TimeRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.plannerservice.DiningStreetResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new PlannerServiceMethodDescriptorSupplier("GetDiningStreets"))
+                  .build();
+          }
+        }
+     }
+     return getGetDiningStreetsMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -104,6 +136,18 @@ public final class PlannerServiceGrpc {
       asyncUnimplementedUnaryCall(getGetPedestrianStreetsMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * server streaming
+     * Send information to users about streets that are repurposed for outdoor dining depending on the time of the day.
+     * response example: street1 outdoor dining true, street2 outdoor dining false, street3 outdoor dining true
+     * </pre>
+     */
+    public void getDiningStreets(grpc.plannerservice.TimeRequest request,
+        io.grpc.stub.StreamObserver<grpc.plannerservice.DiningStreetResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetDiningStreetsMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -113,6 +157,13 @@ public final class PlannerServiceGrpc {
                 grpc.plannerservice.DayRequest,
                 grpc.plannerservice.StreetResponse>(
                   this, METHODID_GET_PEDESTRIAN_STREETS)))
+          .addMethod(
+            getGetDiningStreetsMethod(),
+            asyncServerStreamingCall(
+              new MethodHandlers<
+                grpc.plannerservice.TimeRequest,
+                grpc.plannerservice.DiningStreetResponse>(
+                  this, METHODID_GET_DINING_STREETS)))
           .build();
     }
   }
@@ -150,6 +201,19 @@ public final class PlannerServiceGrpc {
       asyncServerStreamingCall(
           getChannel().newCall(getGetPedestrianStreetsMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * server streaming
+     * Send information to users about streets that are repurposed for outdoor dining depending on the time of the day.
+     * response example: street1 outdoor dining true, street2 outdoor dining false, street3 outdoor dining true
+     * </pre>
+     */
+    public void getDiningStreets(grpc.plannerservice.TimeRequest request,
+        io.grpc.stub.StreamObserver<grpc.plannerservice.DiningStreetResponse> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getGetDiningStreetsMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -185,6 +249,19 @@ public final class PlannerServiceGrpc {
       return blockingServerStreamingCall(
           getChannel(), getGetPedestrianStreetsMethod(), getCallOptions(), request);
     }
+
+    /**
+     * <pre>
+     * server streaming
+     * Send information to users about streets that are repurposed for outdoor dining depending on the time of the day.
+     * response example: street1 outdoor dining true, street2 outdoor dining false, street3 outdoor dining true
+     * </pre>
+     */
+    public java.util.Iterator<grpc.plannerservice.DiningStreetResponse> getDiningStreets(
+        grpc.plannerservice.TimeRequest request) {
+      return blockingServerStreamingCall(
+          getChannel(), getGetDiningStreetsMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -210,6 +287,7 @@ public final class PlannerServiceGrpc {
   }
 
   private static final int METHODID_GET_PEDESTRIAN_STREETS = 0;
+  private static final int METHODID_GET_DINING_STREETS = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -231,6 +309,10 @@ public final class PlannerServiceGrpc {
         case METHODID_GET_PEDESTRIAN_STREETS:
           serviceImpl.getPedestrianStreets((grpc.plannerservice.DayRequest) request,
               (io.grpc.stub.StreamObserver<grpc.plannerservice.StreetResponse>) responseObserver);
+          break;
+        case METHODID_GET_DINING_STREETS:
+          serviceImpl.getDiningStreets((grpc.plannerservice.TimeRequest) request,
+              (io.grpc.stub.StreamObserver<grpc.plannerservice.DiningStreetResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -294,6 +376,7 @@ public final class PlannerServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new PlannerServiceFileDescriptorSupplier())
               .addMethod(getGetPedestrianStreetsMethod())
+              .addMethod(getGetDiningStreetsMethod())
               .build();
         }
       }

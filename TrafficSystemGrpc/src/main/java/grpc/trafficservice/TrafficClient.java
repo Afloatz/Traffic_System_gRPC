@@ -35,8 +35,9 @@ public class TrafficClient {
 			// Uncomment the service that you want to use:
 			//sendEmergency();	
 			//liveFeed();
-			calculatePedestrianNumber();
-			//streetAlert();						
+			//calculatePedestrianNumber();
+			streetAlert();	
+			
 		} catch (StatusRuntimeException e) {
 			System.out.println(e.getMessage());
 		} finally {

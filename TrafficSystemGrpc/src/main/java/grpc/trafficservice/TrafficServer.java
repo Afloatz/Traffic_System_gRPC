@@ -174,6 +174,7 @@ public class TrafficServer {
 					String responseLocation = "Alert at " +  value.getAlert().getLocation();
 					String responseMessage = value.getAlert().getMessage();
 					
+					//send back the alerts to the user
 					UserAlertResponse userAlertResponse = UserAlertResponse.newBuilder()
 							.setResult(responseLocation + "\n" + responseMessage)
 							.build();

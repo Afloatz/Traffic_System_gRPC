@@ -14,7 +14,13 @@ service PlannerService{
     // several responses (ex: Monday -> street1 closed, street2 closed)
     rpc GetPedestrianStreets (DayRequest) returns (stream StreetResponse);
 
+    // server streaming
+    // Send information to users about streets that are repurposed for outdoor dining depending on the time of the day.
+    // response example: street1 outdoor dining true, street2 outdoor dining false, street3 outdoor dining true
+    rpc GetDiningStreets (TimeRequest) returns (stream DiningStreetResponse);
+
 }
+
 
 message DayRequest {
 	enum DayOfTheWeek{
@@ -33,4 +39,12 @@ message DayRequest {
 
 message StreetResponse {
 	string message = 1;
+}
+
+message TimeRequest{
+	string time = 1;
+}
+
+message DiningStreetResponse{
+	bool isClosed = 1;
 }
