@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private TimeRequest() {
-    time_ = "";
+    time_ = 0F;
   }
 
   @java.lang.Override
@@ -43,10 +43,9 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 13: {
 
-            time_ = s;
+            time_ = input.readFloat();
             break;
           }
           default: {
@@ -82,37 +81,12 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int TIME_FIELD_NUMBER = 1;
-  private volatile java.lang.Object time_;
+  private float time_;
   /**
-   * <code>string time = 1;</code>
+   * <code>float time = 1;</code>
    */
-  public java.lang.String getTime() {
-    java.lang.Object ref = time_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      time_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string time = 1;</code>
-   */
-  public com.google.protobuf.ByteString
-      getTimeBytes() {
-    java.lang.Object ref = time_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      time_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public float getTime() {
+    return time_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -129,8 +103,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getTimeBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, time_);
+    if (time_ != 0F) {
+      output.writeFloat(1, time_);
     }
     unknownFields.writeTo(output);
   }
@@ -141,8 +115,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getTimeBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, time_);
+    if (time_ != 0F) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeFloatSize(1, time_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -160,8 +135,10 @@ private static final long serialVersionUID = 0L;
     grpc.plannerservice.TimeRequest other = (grpc.plannerservice.TimeRequest) obj;
 
     boolean result = true;
-    result = result && getTime()
-        .equals(other.getTime());
+    result = result && (
+        java.lang.Float.floatToIntBits(getTime())
+        == java.lang.Float.floatToIntBits(
+            other.getTime()));
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -174,7 +151,8 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + TIME_FIELD_NUMBER;
-    hash = (53 * hash) + getTime().hashCode();
+    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+        getTime());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -308,7 +286,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      time_ = "";
+      time_ = 0F;
 
       return this;
     }
@@ -385,9 +363,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(grpc.plannerservice.TimeRequest other) {
       if (other == grpc.plannerservice.TimeRequest.getDefaultInstance()) return this;
-      if (!other.getTime().isEmpty()) {
-        time_ = other.time_;
-        onChanged();
+      if (other.getTime() != 0F) {
+        setTime(other.getTime());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -418,71 +395,28 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object time_ = "";
+    private float time_ ;
     /**
-     * <code>string time = 1;</code>
+     * <code>float time = 1;</code>
      */
-    public java.lang.String getTime() {
-      java.lang.Object ref = time_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        time_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    public float getTime() {
+      return time_;
     }
     /**
-     * <code>string time = 1;</code>
+     * <code>float time = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getTimeBytes() {
-      java.lang.Object ref = time_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        time_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string time = 1;</code>
-     */
-    public Builder setTime(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
+    public Builder setTime(float value) {
+      
       time_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string time = 1;</code>
+     * <code>float time = 1;</code>
      */
     public Builder clearTime() {
       
-      time_ = getDefaultInstance().getTime();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string time = 1;</code>
-     */
-    public Builder setTimeBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      time_ = value;
+      time_ = 0F;
       onChanged();
       return this;
     }

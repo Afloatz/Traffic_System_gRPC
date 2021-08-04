@@ -50,7 +50,7 @@ public final class PlannerServiceImpl {
       "\007TUESDAY\020\002\022\r\n\tWEDNESDAY\020\003\022\014\n\010THURSDAY\020\004\022" +
       "\n\n\006FRIDAY\020\005\022\014\n\010SATURDAY\020\006\022\n\n\006SUNDAY\020\007\"!\n" +
       "\016StreetResponse\022\017\n\007message\030\001 \001(\t\"\033\n\013Time" +
-      "Request\022\014\n\004time\030\001 \001(\t\"(\n\024DiningStreetRes" +
+      "Request\022\014\n\004time\030\001 \001(\002\"(\n\024DiningStreetRes" +
       "ponse\022\020\n\010isClosed\030\001 \001(\0102\277\001\n\016PlannerServi" +
       "ce\022T\n\024GetPedestrianStreets\022\032.plannerserv" +
       "ice.DayRequest\032\036.plannerservice.StreetRe" +

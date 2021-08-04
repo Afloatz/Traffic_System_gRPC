@@ -42,7 +42,7 @@ message StreetResponse {
 }
 
 message TimeRequest{
-	string time = 1;
+	float time = 1;
 }
 
 message DiningStreetResponse{

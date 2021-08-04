@@ -35,7 +35,7 @@ public class PlannerServer {
 	// Extend abstract base class for our implementation
 	static class PlannerServerImpl extends PlannerServiceImplBase{
 		
-		// Server streaming method
+		// Server streaming method 1
 		@Override
 		public void getPedestrianStreets(DayRequest request, StreamObserver<StreetResponse> responseObserver) {
 			System.out.println("receiving day: " + request.getDayOfTheWeek());		
@@ -139,6 +139,25 @@ public class PlannerServer {
 			}
 			
 		}
+		
+//		//server streaming method 2
+//		@Override
+//		public void getDiningStreets(TimeRequest request, StreamObserver<DiningStreetResponse> responseObserver) {
+//
+//			System.out.println("receiving time: " + request.getTime());
+//			
+//			try {				
+//				DiningStreetResponse.Builder response = DiningStreetResponse.newBuilder();
+//				
+//				int time = Integer.parseInt(request.getTime()); //get the time enter by the user as a string and conver
+//				
+//				
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			} finally {
+//				
+//			}
+//		}
 		
 	}
 
