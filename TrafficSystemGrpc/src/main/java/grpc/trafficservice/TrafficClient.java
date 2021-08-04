@@ -1,5 +1,6 @@
 package grpc.trafficservice;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import grpc.trafficservice.trafficServiceGrpc.trafficServiceBlockingStub;
@@ -30,22 +31,17 @@ public class TrafficClient {
 		// async stub
 		asyncStub = trafficServiceGrpc.newStub(trafficChannel);
 		
-		try {		
-			
+		try {					
 			// Uncomment the service that you want to use:
 			//sendEmergency();	
 			//liveFeed();
 			calculatePedestrianNumber();
-			//streetAlert();
-			
-			
+			//streetAlert();						
 		} catch (StatusRuntimeException e) {
 			System.out.println(e.getMessage());
 		} finally {
 			trafficChannel.shutdown().awaitTermination(5, TimeUnit.SECONDS);			
-		}
-			
-			
+		}						
 	}
 	
 	//  unary rpc
@@ -83,7 +79,7 @@ public class TrafficClient {
 
 			@Override
 			public void onError(Throwable t) {
-				// TODO Auto-generated method stub
+				t.printStackTrace();
 				
 			}
 
@@ -93,20 +89,27 @@ public class TrafficClient {
 			}				
 		};
 		
+		//generate random numbers that represents the number of people currently in the street
+		Random myRan = new Random();
+		int randomNumber1 = myRan.nextInt(100); // 0, 1, 2, ..., 98, 99
+		int randomNumber2 = myRan.nextInt(200);
+		int randomNumber3 = myRan.nextInt(50);
+		int randomNumber4 = myRan.nextInt(400);
+		
 		//create the message and send it to the server
 		StreamObserver<Video> requestObserver = asyncStub.calculatePedestrianNumber(responseObserver);
 		//1st data
-		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(86).build());
-		//Thread.sleep(500);
+		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(randomNumber1).build());
+		Thread.sleep(500);
 		//2dn data
-		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(189).build());
-		//Thread.sleep(500);
+		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(randomNumber2).build());
+		Thread.sleep(500);
 		
-		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(152).build());
-		//Thread.sleep(500);
+		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(randomNumber3).build());
+		Thread.sleep(500);
 		
-		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(140).build());
-		//Thread.sleep(500);
+		requestObserver.onNext(Video.newBuilder().setPedestrianNumber(randomNumber4).build());
+		Thread.sleep(500);
 		
 		System.out.println("Sending data");
 		
@@ -146,10 +149,6 @@ public class TrafficClient {
 		//Thread.sleep(500);
 		
 		requestObserver.onCompleted();
-		Thread.sleep(5000);
-
-	
+		Thread.sleep(5000);	
 	}
-	
-
 }
