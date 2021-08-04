@@ -18,7 +18,7 @@ public interface DiningStreetResponseOrBuilder extends
       getStreetNameBytes();
 
   /**
-   * <code>bool isClosed = 2;</code>
+   * <code>bool hasOutdoorDining = 2;</code>
    */
-  boolean getIsClosed();
+  boolean getHasOutdoorDining();
 }

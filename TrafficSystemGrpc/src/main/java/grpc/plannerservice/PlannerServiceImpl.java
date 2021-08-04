@@ -50,15 +50,15 @@ public final class PlannerServiceImpl {
       "\007TUESDAY\020\002\022\r\n\tWEDNESDAY\020\003\022\014\n\010THURSDAY\020\004\022" +
       "\n\n\006FRIDAY\020\005\022\014\n\010SATURDAY\020\006\022\n\n\006SUNDAY\020\007\"!\n" +
       "\016StreetResponse\022\017\n\007message\030\001 \001(\t\"\033\n\013Time" +
-      "Request\022\014\n\004time\030\001 \001(\002\"<\n\024DiningStreetRes" +
-      "ponse\022\022\n\nstreetName\030\001 \001(\t\022\020\n\010isClosed\030\002 " +
-      "\001(\0102\277\001\n\016PlannerService\022T\n\024GetPedestrianS" +
-      "treets\022\032.plannerservice.DayRequest\032\036.pla" +
-      "nnerservice.StreetResponse0\001\022W\n\020GetDinin" +
-      "gStreets\022\033.plannerservice.TimeRequest\032$." +
-      "plannerservice.DiningStreetResponse0\001B+\n" +
-      "\023grpc.plannerserviceB\022PlannerServiceImpl" +
-      "P\001b\006proto3"
+      "Request\022\014\n\004time\030\001 \001(\002\"D\n\024DiningStreetRes" +
+      "ponse\022\022\n\nstreetName\030\001 \001(\t\022\030\n\020hasOutdoorD" +
+      "ining\030\002 \001(\0102\277\001\n\016PlannerService\022T\n\024GetPed" +
+      "estrianStreets\022\032.plannerservice.DayReque" +
+      "st\032\036.plannerservice.StreetResponse0\001\022W\n\020" +
+      "GetDiningStreets\022\033.plannerservice.TimeRe" +
+      "quest\032$.plannerservice.DiningStreetRespo" +
+      "nse0\001B+\n\023grpc.plannerserviceB\022PlannerSer" +
+      "viceImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -95,7 +95,7 @@ public final class PlannerServiceImpl {
     internal_static_plannerservice_DiningStreetResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_plannerservice_DiningStreetResponse_descriptor,
-        new java.lang.String[] { "StreetName", "IsClosed", });
+        new java.lang.String[] { "StreetName", "HasOutdoorDining", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

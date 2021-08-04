@@ -17,7 +17,7 @@ private static final long serialVersionUID = 0L;
   }
   private DiningStreetResponse() {
     streetName_ = "";
-    isClosed_ = false;
+    hasOutdoorDining_ = false;
   }
 
   @java.lang.Override
@@ -52,7 +52,7 @@ private static final long serialVersionUID = 0L;
           }
           case 16: {
 
-            isClosed_ = input.readBool();
+            hasOutdoorDining_ = input.readBool();
             break;
           }
           default: {
@@ -121,13 +121,13 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int ISCLOSED_FIELD_NUMBER = 2;
-  private boolean isClosed_;
+  public static final int HASOUTDOORDINING_FIELD_NUMBER = 2;
+  private boolean hasOutdoorDining_;
   /**
-   * <code>bool isClosed = 2;</code>
+   * <code>bool hasOutdoorDining = 2;</code>
    */
-  public boolean getIsClosed() {
-    return isClosed_;
+  public boolean getHasOutdoorDining() {
+    return hasOutdoorDining_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -147,8 +147,8 @@ private static final long serialVersionUID = 0L;
     if (!getStreetNameBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, streetName_);
     }
-    if (isClosed_ != false) {
-      output.writeBool(2, isClosed_);
+    if (hasOutdoorDining_ != false) {
+      output.writeBool(2, hasOutdoorDining_);
     }
     unknownFields.writeTo(output);
   }
@@ -162,9 +162,9 @@ private static final long serialVersionUID = 0L;
     if (!getStreetNameBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, streetName_);
     }
-    if (isClosed_ != false) {
+    if (hasOutdoorDining_ != false) {
       size += com.google.protobuf.CodedOutputStream
-        .computeBoolSize(2, isClosed_);
+        .computeBoolSize(2, hasOutdoorDining_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -184,8 +184,8 @@ private static final long serialVersionUID = 0L;
     boolean result = true;
     result = result && getStreetName()
         .equals(other.getStreetName());
-    result = result && (getIsClosed()
-        == other.getIsClosed());
+    result = result && (getHasOutdoorDining()
+        == other.getHasOutdoorDining());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -199,9 +199,9 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + STREETNAME_FIELD_NUMBER;
     hash = (53 * hash) + getStreetName().hashCode();
-    hash = (37 * hash) + ISCLOSED_FIELD_NUMBER;
+    hash = (37 * hash) + HASOUTDOORDINING_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-        getIsClosed());
+        getHasOutdoorDining());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -337,7 +337,7 @@ private static final long serialVersionUID = 0L;
       super.clear();
       streetName_ = "";
 
-      isClosed_ = false;
+      hasOutdoorDining_ = false;
 
       return this;
     }
@@ -366,7 +366,7 @@ private static final long serialVersionUID = 0L;
     public grpc.plannerservice.DiningStreetResponse buildPartial() {
       grpc.plannerservice.DiningStreetResponse result = new grpc.plannerservice.DiningStreetResponse(this);
       result.streetName_ = streetName_;
-      result.isClosed_ = isClosed_;
+      result.hasOutdoorDining_ = hasOutdoorDining_;
       onBuilt();
       return result;
     }
@@ -419,8 +419,8 @@ private static final long serialVersionUID = 0L;
         streetName_ = other.streetName_;
         onChanged();
       }
-      if (other.getIsClosed() != false) {
-        setIsClosed(other.getIsClosed());
+      if (other.getHasOutdoorDining() != false) {
+        setHasOutdoorDining(other.getHasOutdoorDining());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -520,28 +520,28 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private boolean isClosed_ ;
+    private boolean hasOutdoorDining_ ;
     /**
-     * <code>bool isClosed = 2;</code>
+     * <code>bool hasOutdoorDining = 2;</code>
      */
-    public boolean getIsClosed() {
-      return isClosed_;
+    public boolean getHasOutdoorDining() {
+      return hasOutdoorDining_;
     }
     /**
-     * <code>bool isClosed = 2;</code>
+     * <code>bool hasOutdoorDining = 2;</code>
      */
-    public Builder setIsClosed(boolean value) {
+    public Builder setHasOutdoorDining(boolean value) {
       
-      isClosed_ = value;
+      hasOutdoorDining_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>bool isClosed = 2;</code>
+     * <code>bool hasOutdoorDining = 2;</code>
      */
-    public Builder clearIsClosed() {
+    public Builder clearHasOutdoorDining() {
       
-      isClosed_ = false;
+      hasOutdoorDining_ = false;
       onChanged();
       return this;
     }

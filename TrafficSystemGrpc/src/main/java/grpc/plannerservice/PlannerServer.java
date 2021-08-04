@@ -152,21 +152,25 @@ public class PlannerServer {
 				float time = request.getTime(); 
 				
 				//depending on the time of the day, send different responses
-				if (time >= 11 && time <= 24) { // if it's between 11am and midnight
-					response.setIsClosed(true);	
+				if (time >= 11 && time <= 24) { // if it's between 11am and midnight, registered streets have outdoor dining
+					response.setStreetName("Capel");
+					response.setHasOutdoorDining(true);
 					responseObserver.onNext(response.build()); 
 					Thread.sleep(1000);
 
-					response.setIsClosed(true);
+					response.setStreetName("Exchequer");
+					response.setHasOutdoorDining(true);
 					responseObserver.onNext(response.build()); 
 					Thread.sleep(1000);	
 					
-				} else { // if it's past midnight and before 11am
-					response.setIsClosed(false);	
+				} else { // if it's past midnight and before 11am, no street has outdoor dining at that time
+					response.setStreetName("Capel");
+					response.setHasOutdoorDining(false);
 					responseObserver.onNext(response.build()); 
 					Thread.sleep(1000);
 
-					response.setIsClosed(false);
+					response.setStreetName("Exchequer");
+					response.setHasOutdoorDining(false);
 					responseObserver.onNext(response.build()); 
 					Thread.sleep(1000);	
 				}
