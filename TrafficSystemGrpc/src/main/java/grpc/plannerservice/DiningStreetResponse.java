@@ -16,6 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private DiningStreetResponse() {
+    streetName_ = "";
     isClosed_ = false;
   }
 
@@ -43,7 +44,13 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 8: {
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            streetName_ = s;
+            break;
+          }
+          case 16: {
 
             isClosed_ = input.readBool();
             break;
@@ -80,10 +87,44 @@ private static final long serialVersionUID = 0L;
             grpc.plannerservice.DiningStreetResponse.class, grpc.plannerservice.DiningStreetResponse.Builder.class);
   }
 
-  public static final int ISCLOSED_FIELD_NUMBER = 1;
+  public static final int STREETNAME_FIELD_NUMBER = 1;
+  private volatile java.lang.Object streetName_;
+  /**
+   * <code>string streetName = 1;</code>
+   */
+  public java.lang.String getStreetName() {
+    java.lang.Object ref = streetName_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      streetName_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string streetName = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getStreetNameBytes() {
+    java.lang.Object ref = streetName_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      streetName_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int ISCLOSED_FIELD_NUMBER = 2;
   private boolean isClosed_;
   /**
-   * <code>bool isClosed = 1;</code>
+   * <code>bool isClosed = 2;</code>
    */
   public boolean getIsClosed() {
     return isClosed_;
@@ -103,8 +144,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (!getStreetNameBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, streetName_);
+    }
     if (isClosed_ != false) {
-      output.writeBool(1, isClosed_);
+      output.writeBool(2, isClosed_);
     }
     unknownFields.writeTo(output);
   }
@@ -115,9 +159,12 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (!getStreetNameBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, streetName_);
+    }
     if (isClosed_ != false) {
       size += com.google.protobuf.CodedOutputStream
-        .computeBoolSize(1, isClosed_);
+        .computeBoolSize(2, isClosed_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -135,6 +182,8 @@ private static final long serialVersionUID = 0L;
     grpc.plannerservice.DiningStreetResponse other = (grpc.plannerservice.DiningStreetResponse) obj;
 
     boolean result = true;
+    result = result && getStreetName()
+        .equals(other.getStreetName());
     result = result && (getIsClosed()
         == other.getIsClosed());
     result = result && unknownFields.equals(other.unknownFields);
@@ -148,6 +197,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + STREETNAME_FIELD_NUMBER;
+    hash = (53 * hash) + getStreetName().hashCode();
     hash = (37 * hash) + ISCLOSED_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getIsClosed());
@@ -284,6 +335,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      streetName_ = "";
+
       isClosed_ = false;
 
       return this;
@@ -312,6 +365,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public grpc.plannerservice.DiningStreetResponse buildPartial() {
       grpc.plannerservice.DiningStreetResponse result = new grpc.plannerservice.DiningStreetResponse(this);
+      result.streetName_ = streetName_;
       result.isClosed_ = isClosed_;
       onBuilt();
       return result;
@@ -361,6 +415,10 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(grpc.plannerservice.DiningStreetResponse other) {
       if (other == grpc.plannerservice.DiningStreetResponse.getDefaultInstance()) return this;
+      if (!other.getStreetName().isEmpty()) {
+        streetName_ = other.streetName_;
+        onChanged();
+      }
       if (other.getIsClosed() != false) {
         setIsClosed(other.getIsClosed());
       }
@@ -393,15 +451,84 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private java.lang.Object streetName_ = "";
+    /**
+     * <code>string streetName = 1;</code>
+     */
+    public java.lang.String getStreetName() {
+      java.lang.Object ref = streetName_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        streetName_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string streetName = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStreetNameBytes() {
+      java.lang.Object ref = streetName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        streetName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string streetName = 1;</code>
+     */
+    public Builder setStreetName(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      streetName_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string streetName = 1;</code>
+     */
+    public Builder clearStreetName() {
+      
+      streetName_ = getDefaultInstance().getStreetName();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string streetName = 1;</code>
+     */
+    public Builder setStreetNameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      streetName_ = value;
+      onChanged();
+      return this;
+    }
+
     private boolean isClosed_ ;
     /**
-     * <code>bool isClosed = 1;</code>
+     * <code>bool isClosed = 2;</code>
      */
     public boolean getIsClosed() {
       return isClosed_;
     }
     /**
-     * <code>bool isClosed = 1;</code>
+     * <code>bool isClosed = 2;</code>
      */
     public Builder setIsClosed(boolean value) {
       
@@ -410,7 +537,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>bool isClosed = 1;</code>
+     * <code>bool isClosed = 2;</code>
      */
     public Builder clearIsClosed() {
       

@@ -46,5 +46,6 @@ message TimeRequest{
 }
 
 message DiningStreetResponse{
-	bool isClosed = 1;
+	string streetName = 1;
+	bool isClosed = 2;
 }

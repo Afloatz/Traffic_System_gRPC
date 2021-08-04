@@ -8,7 +8,17 @@ public interface DiningStreetResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>bool isClosed = 1;</code>
+   * <code>string streetName = 1;</code>
+   */
+  java.lang.String getStreetName();
+  /**
+   * <code>string streetName = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getStreetNameBytes();
+
+  /**
+   * <code>bool isClosed = 2;</code>
    */
   boolean getIsClosed();
 }

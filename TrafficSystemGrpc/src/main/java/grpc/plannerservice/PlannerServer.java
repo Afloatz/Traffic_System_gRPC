@@ -140,24 +140,43 @@ public class PlannerServer {
 			
 		}
 		
-//		//server streaming method 2
-//		@Override
-//		public void getDiningStreets(TimeRequest request, StreamObserver<DiningStreetResponse> responseObserver) {
-//
-//			System.out.println("receiving time: " + request.getTime());
-//			
-//			try {				
-//				DiningStreetResponse.Builder response = DiningStreetResponse.newBuilder();
-//				
-//				int time = Integer.parseInt(request.getTime()); //get the time enter by the user as a string and conver
-//				
-//				
-//			} catch (Exception e) {
-//				// TODO: handle exception
-//			} finally {
-//				
-//			}
-//		}
+		//server streaming method 2
+		@Override
+		public void getDiningStreets(TimeRequest request, StreamObserver<DiningStreetResponse> responseObserver) {
+			
+			System.out.println("receiving time: " + request.getTime());
+			
+			try {
+				
+				DiningStreetResponse.Builder response = DiningStreetResponse.newBuilder(); 
+				float time = request.getTime(); 
+				
+				//depending on the time of the day, send different responses
+				if (time >= 11 && time <= 24) { // if it's between 11am and midnight
+					response.setIsClosed(true);	
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+
+					response.setIsClosed(true);
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);	
+					
+				} else { // if it's past midnight and before 11am
+					response.setIsClosed(false);	
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);
+
+					response.setIsClosed(false);
+					responseObserver.onNext(response.build()); 
+					Thread.sleep(1000);	
+				}
+				
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} finally {
+				responseObserver.onCompleted();
+			}
+		}
 		
 	}
 
