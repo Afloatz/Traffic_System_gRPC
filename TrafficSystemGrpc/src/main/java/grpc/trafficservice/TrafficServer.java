@@ -25,9 +25,10 @@ public class TrafficServer {
 
 		System.out.println("Starting traffic Server");
 		
+		//Service Registration:
 		int port = 50051; // port number that we will use
-		String service_type = "_grpc._tcp.local."; //enter a different name for my second server "_grpc2._tcp.local.". if does not work, might need to use instead "_http._tcp.local."
-		String service_name = "GrpcServer";
+		String service_type = "_grpc1._tcp.local.";
+		String service_name = "GrpcTrafficServer";
 		SimpleServiceRegistration ssr = new SimpleServiceRegistration();
 		ssr.run(port, service_type, service_name);
 		

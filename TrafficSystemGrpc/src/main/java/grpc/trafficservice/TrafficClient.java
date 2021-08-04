@@ -3,6 +3,9 @@ package grpc.trafficservice;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javax.jmdns.ServiceInfo;
+
+import grpc.jmdns.SimpleServiceDiscovery;
 import grpc.trafficservice.trafficServiceGrpc.trafficServiceBlockingStub;
 import grpc.trafficservice.trafficServiceGrpc.trafficServiceStub;
 import io.grpc.ManagedChannel;
@@ -17,9 +20,14 @@ public class TrafficClient {
 	
 	public static void main(String[] args) throws InterruptedException {
 		
-		//Build a channel (to connect the server and client)
-		int port = 50051; 
-		String host = "localhost"; // location of the server
+		//Service discovery:
+		ServiceInfo serviceInfo;
+		String service_type = "_grpc1._tcp.local."; //type of service we are looking for on the server
+		//Now retrieve the service info 
+		serviceInfo = SimpleServiceDiscovery.run(service_type); //discover the port
+		//Use the serviceInfo to retrieve the port
+		int port = serviceInfo.getPort();
+		String host = "localhost";
 		
 		//Create the channel 
 		ManagedChannel trafficChannel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
@@ -33,8 +41,8 @@ public class TrafficClient {
 			// Uncomment the rpc that you want to use:
 			//sendEmergency();	
 			//liveFeed();
-			//calculatePedestrianNumber();
-			streetAlert();	
+			calculatePedestrianNumber();
+			//streetAlert();	
 			
 		} catch (StatusRuntimeException e) {
 			System.out.println(e.getMessage());
