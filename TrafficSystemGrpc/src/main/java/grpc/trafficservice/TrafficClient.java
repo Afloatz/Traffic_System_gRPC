@@ -34,8 +34,8 @@ public class TrafficClient {
 			
 			// Uncomment the service that you want to use:
 			//sendEmergency();	
-			liveFeed();
-			//calculatePedestrianNumber();
+			//liveFeed();
+			calculatePedestrianNumber();
 			//streetAlert();
 			
 			

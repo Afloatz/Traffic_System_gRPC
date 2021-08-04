@@ -36,7 +36,7 @@ public class MainGUIApplication {
 	 * Launch the application.
 	 */
 
-	//standard structure for the main method to launch the GUI
+	//launch the GUI
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -74,7 +74,7 @@ public class MainGUIApplication {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame(); //JFrame is the window that popup
+		frame = new JFrame(); 
 		frame.setTitle("Traffic Client - Service Controller");
 		frame.setBounds(100, 100, 500, 300); //where the window will be and its size
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,13 +83,16 @@ public class MainGUIApplication {
 		
 		frame.getContentPane().setLayout(bl);
 		
-		//a panel is a container within the window (the frame). It's a holder for the components
-		JPanel panel_service_1 = new JPanel(); //for multiple services, create 1 panel for each service
+		JPanel panel_service_1 = new JPanel(); 
 		frame.getContentPane().add(panel_service_1);
 		//flowlayout to display the components
 		panel_service_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		//UNARY RPC sendEmergency()
+		
+		/**
+		 * //UNARY RPC SendEmergency
+		 */
+		
 		//create new label and add it to the panel
 		JLabel lblNewLabel_1 = new JLabel(" Send emergency at (enter location) ");
 		panel_service_1.add(lblNewLabel_1);
@@ -98,49 +101,44 @@ public class MainGUIApplication {
 		textLocation = new JTextField();
 		panel_service_1.add(textLocation);
 		//how wide should input box be?
-		textLocation.setColumns(10);
-			
+		textLocation.setColumns(10);		
 		
 		JButton btnSend = new JButton("Send the emergency team");
 		
-		//add an action listener to our button
-		// I can create different buttons for my different rpc
+		//add an action listener to that first button
 		btnSend.addActionListener(new ActionListener() {
 			
-			//implement action performed method
 			//this will happen when the button is clicked
 			public void actionPerformed(ActionEvent e) {
-				
-				//add the code that I have in my client here
-				
-				//retrieve data from GUI (here 3 data: name1, name2 and index)
+								
+				//retrieve data from GUI 
 				String location = textLocation.getText();
 					
-				//talk to the server, do the grpc:
+				//talk to the server
 				RequestEmergency rEmergency = RequestEmergency.newBuilder().setMessage(location).build();
 				EmergencyResponse response = blockingStub.sendEmergency(rEmergency);
 				
-				//back to GUI. Populate the GUI with the response
-				//populate the JTextArea in the panel
-				textResponse.append("reply: " + response.getText()); //extracting whatever comes back from the server
+				//Populate the GUI with the response
+				textResponse.append("reply: " + response.getText()); 
 				
-				System.out.println("response: " + response.getText());
+				System.out.println("response: " + response.getText()); //display on the console
 			}
 		});
 		panel_service_1.add(btnSend);
 		
-		//details of how we are creating the text response:
-		textResponse = new JTextArea(3, 20); //construct a new text area
+		textResponse = new JTextArea(3, 20); //construct a new text area for the response
 		textResponse .setLineWrap(true);
 		textResponse.setWrapStyleWord(true);
 		
 		JScrollPane scrollPane = new JScrollPane(textResponse);
 		
-		//textResponse.setSize(new Dimension(15, 30));
 		panel_service_1.add(scrollPane);
 		
 		
-		//SERVER STREAMING RPC livefeed()
+		/**
+		 * //SERVER STREAMING RPC LiveFeed
+		 */
+		
 		JLabel lblNewLabel_2 = new JLabel(" Get livefeed (enter Dublin district number) ");
 		panel_service_1.add(lblNewLabel_2);
 		
@@ -153,19 +151,19 @@ public class MainGUIApplication {
 		
 		JButton btnSend2 = new JButton("Send me the livefeed from that area");
 		
-		//add an action listener to our button
-		// I can create different buttons for my different rpc
+		//add an action listener to our 2nd button
 		btnSend2.addActionListener(new ActionListener() {
 			
-			//implement action performed method
 			//this will happen when the button is clicked
 			public void actionPerformed(ActionEvent e) {
 							
 				//retrieve data from GUI 
 				int num = Integer.parseInt(textNumber.getText());
 					
-				//talk to the server, do the grpc:
+				//talk to the server
 				Area requestArea = Area.newBuilder().setIntArea(num).build();
+				
+				//Populate the GUI with the response
 				blockingStub.liveFeed(requestArea).forEachRemaining(StreetSituation -> {
 					textResponse2.append("\nReply: " + StreetSituation.getTextSituation());
 				});
@@ -175,14 +173,12 @@ public class MainGUIApplication {
 		});
 		panel_service_1.add(btnSend2);
 		
-		//details of how we are creating the text response:
-		textResponse2 = new JTextArea(5, 30); //construct a new text area
+		textResponse2 = new JTextArea(5, 30); //construct a new text area for the server streaming response
 		textResponse2.setLineWrap(true);
 		textResponse2.setWrapStyleWord(true);
 		
 		JScrollPane scrollPane2 = new JScrollPane(textResponse2);
 		
-		//textResponse.setSize(new Dimension(15, 30));
 		panel_service_1.add(scrollPane2);
 		
 	}
