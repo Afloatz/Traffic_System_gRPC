@@ -56,10 +56,7 @@ public class PlannerGUIApplication {
 	 * Create the application.
 	 */
 	public PlannerGUIApplication() {
-		
-//		int port = 50052;
-//		String host = "localhost"; 
-		
+			
 		//Service discovery:
 		ServiceInfo serviceInfo;
 		String service_type = "_grpc2._tcp.local."; //type of service we are looking for on the server

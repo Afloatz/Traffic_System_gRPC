@@ -183,15 +183,32 @@ public class TrafficServer {
 
 				@Override
 				public void onNext(UserAlertRequest value) {
-					String responseLocation = "Alert at " +  value.getAlert().getLocation();
-					String responseMessage = value.getAlert().getMessage();
 					
-					//send back the alerts to the user
-					UserAlertResponse userAlertResponse = UserAlertResponse.newBuilder()
-							.setResult(responseLocation + "\n" + responseMessage)
-							.build();
+					String location = value.getAlert().getLocation();
+					String message = value.getAlert().getMessage();
 					
-					responseObserver.onNext(userAlertResponse);					
+					//user receives all alerts received at a given location from other users
+					if (location.equalsIgnoreCase("Exchequer Street")) {
+						//send the alerts received from that location to the user 
+						UserAlertResponse userAlertResponse = UserAlertResponse.newBuilder()
+								.setResult("Alerts received at " + location + ": " + message)
+								.build();
+						
+						responseObserver.onNext(userAlertResponse);		
+					} else if (location.equalsIgnoreCase("George Street")) {
+						UserAlertResponse userAlertResponse = UserAlertResponse.newBuilder()
+								.setResult("Alerts received at " + location + ": " + message)
+								.build();
+						
+						responseObserver.onNext(userAlertResponse);		
+					} else {
+						UserAlertResponse userAlertResponse = UserAlertResponse.newBuilder()
+								.setResult("No alerts received at " + location + " . You are the first one sending an alert at that location." )
+								.build();
+						
+						responseObserver.onNext(userAlertResponse);		
+					}								
+			
 				}
 
 				@Override

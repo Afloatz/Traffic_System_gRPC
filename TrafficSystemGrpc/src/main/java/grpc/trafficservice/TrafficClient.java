@@ -41,8 +41,8 @@ public class TrafficClient {
 			// Uncomment the rpc that you want to use:
 			//sendEmergency();	
 			//liveFeed();
-			calculatePedestrianNumber();
-			//streetAlert();	
+			//calculatePedestrianNumber();
+			streetAlert();	
 			
 		} catch (StatusRuntimeException e) {
 			System.out.println(e.getMessage());
