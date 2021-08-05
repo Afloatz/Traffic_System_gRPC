@@ -17,9 +17,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import grpc.jmdns.SimpleServiceDiscovery;
+import grpc.trafficservice.Alert;
 import grpc.trafficservice.Area;
 import grpc.trafficservice.EmergencyResponse;
 import grpc.trafficservice.RequestEmergency;
+import grpc.trafficservice.UserAlertRequest;
+import grpc.trafficservice.UserAlertResponse;
 import grpc.trafficservice.Video;
 import grpc.trafficservice.WarningResponse;
 import grpc.trafficservice.trafficServiceGrpc;
@@ -37,8 +40,8 @@ public class MainGUIApplication {
 	private static trafficServiceStub asyncStub;
 	
 	private JFrame frame;
-	private JTextField textLocation, textNumber; //text field is declared here
-	private JTextArea textResponse, textResponse2, textResponse3 ; //text area to put the response into
+	private JTextField textLocation, textLocation2, textLocation3, textNumber, textMessage1, textMessage2; //text field is declared here
+	private JTextArea textResponse, textResponse2, textResponse3, textResponse4; //text area to put the response into
 
 	/**
 	 * Launch the application.
@@ -91,7 +94,7 @@ public class MainGUIApplication {
 	private void initialize() {
 		frame = new JFrame(); 
 		frame.setTitle("Traffic Client - Service Controller");
-		frame.setBounds(100, 100, 500, 500); //where the window will be and its size
+		frame.setBounds(100, 100, 400, 700); //where the window will be and its size
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		BoxLayout bl = new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS);
@@ -109,7 +112,7 @@ public class MainGUIApplication {
 		 */
 		
 		//create new label and add it to the panel
-		JLabel lblNewLabel_1 = new JLabel(" Send emergency at (enter location) ");
+		JLabel lblNewLabel_1 = new JLabel(" Send emergency at (enter street name) ");
 		panel_service_1.add(lblNewLabel_1);
 		
 		//Input textbox (associated with the label we have a text field)
@@ -264,6 +267,106 @@ public class MainGUIApplication {
 		JScrollPane scrollPane3 = new JScrollPane(textResponse3);
 		
 		panel_service_1.add(scrollPane3);
+		
+		/**
+		 * //BiDi RPC StreetAlert
+		 */
+		
+		// 1ST ALERT
+		
+		//create new label and add it to the panel
+		JLabel lblNewLabel_3 = new JLabel(" Enter the street1 ");
+		panel_service_1.add(lblNewLabel_3);
+		
+		//Input textbox (associated with the label we have a text field)
+		textLocation2 = new JTextField();
+		panel_service_1.add(textLocation2);
+		//how wide should input box be?
+		textLocation2.setColumns(10);	
+		
+		//create new label and add it to the panel
+		JLabel lblNewLabel_4 = new JLabel(" Enter your message alert ");
+		panel_service_1.add(lblNewLabel_4);
+		
+		//Input textbox (associated with the label we have a text field)
+		textMessage1 = new JTextField();
+		panel_service_1.add(textMessage1);
+		//how wide should input box be?
+		textMessage1.setColumns(10);	
+		
+		// 2DN ALERT
+		
+		//create new label and add it to the panel
+		JLabel lblNewLabel_5 = new JLabel(" Enter the street2 ");
+		panel_service_1.add(lblNewLabel_5);
+		
+		//Input textbox (associated with the label we have a text field)
+		textLocation3 = new JTextField();
+		panel_service_1.add(textLocation3);
+		//how wide should input box be?
+		textLocation3.setColumns(10);
+		
+		//create new label and add it to the panel
+		JLabel lblNewLabel_6 = new JLabel(" Enter your message alert ");
+		panel_service_1.add(lblNewLabel_6);
+		
+		//Input textbox (associated with the label we have a text field)
+		textMessage2 = new JTextField();
+		panel_service_1.add(textMessage2);
+		//how wide should input box be?
+		textMessage2.setColumns(10);
+		
+		
+		
+		JButton btnSend4 = new JButton("Receive alerts from the locations");
+		
+		//add an action listener to that first button
+		btnSend4.addActionListener(new ActionListener() {
+			
+			//this will happen when the button is clicked
+			public void actionPerformed(ActionEvent e) {
+								
+				//retrieve data from GUI 
+				String location2 = textLocation2.getText();
+				String location3 = textLocation3.getText();
+				
+				String message1 = textMessage1.getText();
+				String message2 = textMessage2.getText();
+					
+				//talk to the server
+				
+				StreamObserver<UserAlertRequest> requestObserver = asyncStub.streetAlert(new StreamObserver<UserAlertResponse>() {
+
+					@Override
+					public void onNext(UserAlertResponse value) {
+						textResponse4.append("Receiving alerts: " + value.getResult());				
+					}
+
+					@Override
+					public void onError(Throwable t) {
+						t.printStackTrace();				
+					}
+
+					@Override
+					public void onCompleted() {
+						System.out.println("Server is done sending alerts");
+					}
+				});
+				
+				requestObserver.onNext(UserAlertRequest.newBuilder().setAlert(Alert.newBuilder().setLocation(location2).setMessage(message1)).build());
+				requestObserver.onNext(UserAlertRequest.newBuilder().setAlert(Alert.newBuilder().setLocation(location3).setMessage(message2)).build());
+
+			}
+		});
+		panel_service_1.add(btnSend4);
+		
+		textResponse4 = new JTextArea(5, 30); //construct a new text area for the response
+		textResponse4 .setLineWrap(true);
+		textResponse4.setWrapStyleWord(true);
+		
+		JScrollPane scrollPane4 = new JScrollPane(textResponse4);
+		
+		panel_service_1.add(scrollPane4);
 		
 	}
 	
