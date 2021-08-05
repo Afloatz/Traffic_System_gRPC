@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.jmdns.ServiceInfo;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import grpc.plannerservice.DayRequest.DayOfTheWeek;
+import grpc.jmdns.SimpleServiceDiscovery;
 import grpc.plannerservice.DayRequest;
 import grpc.plannerservice.PlannerServiceGrpc;
 import grpc.plannerservice.TimeRequest;
@@ -55,8 +57,17 @@ public class PlannerGUIApplication {
 	 */
 	public PlannerGUIApplication() {
 		
-		int port = 50052;
-		String host = "localhost"; 
+//		int port = 50052;
+//		String host = "localhost"; 
+		
+		//Service discovery:
+		ServiceInfo serviceInfo;
+		String service_type = "_grpc2._tcp.local."; //type of service we are looking for on the server
+		//Now retrieve the service info 
+		serviceInfo = SimpleServiceDiscovery.run(service_type); //discover the port
+		//Use the serviceInfo to retrieve the port
+		int port = serviceInfo.getPort();
+		String host = "localhost";
 		
 		ManagedChannel channel = ManagedChannelBuilder
 				.forAddress(host, port)

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import javax.jmdns.ServiceInfo;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import grpc.jmdns.SimpleServiceDiscovery;
 import grpc.trafficservice.Area;
 import grpc.trafficservice.EmergencyResponse;
 import grpc.trafficservice.RequestEmergency;
@@ -61,8 +63,14 @@ public class MainGUIApplication {
 	 */
 	public MainGUIApplication() {
 		
-		int port = 50051;
-		String host = "localhost"; 
+		//Service discovery:
+		ServiceInfo serviceInfo;
+		String service_type = "_grpc1._tcp.local."; //type of service we are looking for on the server
+		//Now retrieve the service info 
+		serviceInfo = SimpleServiceDiscovery.run(service_type); //discover the port
+		//Use the serviceInfo to retrieve the port
+		int port = serviceInfo.getPort();
+		String host = "localhost";
 		
 		ManagedChannel channel = ManagedChannelBuilder
 				.forAddress(host, port)
