@@ -2,6 +2,9 @@ package grpc.plannerservice;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.jmdns.ServiceInfo;
+
+import grpc.jmdns.SimpleServiceDiscovery;
 import grpc.plannerservice.DayRequest.DayOfTheWeek;
 import grpc.plannerservice.PlannerServiceGrpc.PlannerServiceBlockingStub;
 import io.grpc.ManagedChannel;
@@ -13,9 +16,15 @@ public class PlannerClient {
 	private static PlannerServiceBlockingStub bStub;
 	
 	public static void main(String[] args) throws InterruptedException {
-		//Build a channel (to connect the server and client)
-		int port = 50052; 
-		String host = "localhost"; // location of the server
+		
+		//Service discovery:
+		ServiceInfo serviceInfo;
+		String service_type = "_grpc2._tcp.local."; //type of service we are looking for on the server
+		//Now retrieve the service info 
+		serviceInfo = SimpleServiceDiscovery.run(service_type); //discover the port
+		//Use the serviceInfo to retrieve the port
+		int port = serviceInfo.getPort();
+		String host = "localhost";
 		
 		//Create the channel 
 		ManagedChannel plannerChannel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();

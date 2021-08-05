@@ -2,6 +2,7 @@ package grpc.plannerservice;
 
 import java.io.IOException;
 
+import grpc.jmdns.SimpleServiceRegistration;
 import grpc.plannerservice.PlannerServiceGrpc.PlannerServiceImplBase;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -22,7 +23,12 @@ public class PlannerServer {
 
 		System.out.println("Starting planner Server");
 		
+		//Service Registration:
 		int port = 50052; // port number that we will use for this planner service 
+		String service_type = "_grpc2._tcp.local.";
+		String service_name = "GrpcPlannerServer";
+		SimpleServiceRegistration ssr2 = new SimpleServiceRegistration();
+		ssr2.run(port, service_type, service_name);
 		
 		// use the builder to build the object for us
 		server = ServerBuilder.forPort(port).addService(new PlannerServerImpl()).build().start();
