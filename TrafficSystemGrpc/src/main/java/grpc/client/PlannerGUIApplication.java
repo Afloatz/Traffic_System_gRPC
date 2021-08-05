@@ -176,13 +176,20 @@ public class PlannerGUIApplication {
 				TimeRequest request = TimeRequest.newBuilder().setTime(num).build();
 				
 				//Populate the GUI with the response
-				blockingStub.getDiningStreets(request).forEachRemaining(DiningStreetResponse -> {				
-					if (DiningStreetResponse.getHasOutdoorDining()) {
-						textResponse2.append("\n" + DiningStreetResponse.getStreetName() + ": has outdoor dining.");			
-					} else {
-						textResponse2.append("\n" + DiningStreetResponse.getStreetName() +": no outdoor dining at this time");
-					}
-				});								
+				
+				//User input validation, time must be in between 0 and 24
+				if (num >= 0f && num <= 24f) {
+					blockingStub.getDiningStreets(request).forEachRemaining(DiningStreetResponse -> {				
+						if (DiningStreetResponse.getHasOutdoorDining()) {
+							textResponse2.append("\n" + DiningStreetResponse.getStreetName() + ": has outdoor dining.");			
+						} else {
+							textResponse2.append("\n" + DiningStreetResponse.getStreetName() +": no outdoor dining at this time");
+						}
+					});		
+				} else {
+					textResponse2.append("\n Please enter a correct time");
+				}				
+						
 			}
 		});
 		

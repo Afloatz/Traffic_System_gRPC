@@ -62,17 +62,24 @@ public class PlannerClient {
 	// server streaming for rpc 2
 	public static void getDiningStreets() {
 		//prepare the request
-		TimeRequest request = TimeRequest.newBuilder().setTime(12f).build();
+		float time = 12f;
+		TimeRequest request = TimeRequest.newBuilder().setTime(time).build();
 		
 		//stream the responses
-		System.out.println("List of streets having or not outdoor dining at the time you selected: ");
-		bStub.getDiningStreets(request).forEachRemaining(DiningStreetResponse -> {
-			if (DiningStreetResponse.getHasOutdoorDining()) {
-				System.out.println(DiningStreetResponse.getStreetName() + ": has outdoor dining.");			
-			} else {
-				System.out.println(DiningStreetResponse.getStreetName() +": no outdoor dining at this time");
-			}
-		});
+		
+		//User input validation, time must be in between 0 and 24
+		if (time >= 0f && time <= 24f) {
+			System.out.println("List of streets having or not outdoor dining at the time you selected: ");
+			bStub.getDiningStreets(request).forEachRemaining(DiningStreetResponse -> {
+				if (DiningStreetResponse.getHasOutdoorDining()) {
+					System.out.println(DiningStreetResponse.getStreetName() + ": has outdoor dining.");			
+				} else {
+					System.out.println(DiningStreetResponse.getStreetName() +": no outdoor dining at this time");
+				}
+			});
+		} else {
+			System.out.println("\n Please enter a correct time");
+		}	
 	}
 
 }

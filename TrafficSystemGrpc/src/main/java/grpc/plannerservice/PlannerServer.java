@@ -131,6 +131,7 @@ public class PlannerServer {
 					Thread.sleep(1000);				
 					break;			
 				default:
+					//user input validation - a day was not entered
 					response.setMessage("Choose a day of the week!");
 					// Send out message (build our response)
 					responseObserver.onNext(response.build()); 			
