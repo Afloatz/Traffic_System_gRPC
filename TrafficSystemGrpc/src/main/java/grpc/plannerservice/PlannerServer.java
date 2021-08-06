@@ -30,12 +30,19 @@ public class PlannerServer {
 		SimpleServiceRegistration ssr2 = new SimpleServiceRegistration();
 		ssr2.run(port, service_type, service_name);
 		
-		// use the builder to build the object for us
-		server = ServerBuilder.forPort(port).addService(new PlannerServerImpl()).build().start();
+		try {
+			// use the builder to build the object for us
+			server = ServerBuilder.forPort(port).addService(new PlannerServerImpl()).build().start();
+			System.out.println("Server running on port: " + port);			
+			server.awaitTermination();	
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
 		
-		System.out.println("Server running on port: " + port);
-		
-		server.awaitTermination();	
 	}
 	
 	// Extend abstract base class for our implementation

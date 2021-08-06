@@ -40,9 +40,9 @@ public class TrafficClient {
 		try {					
 			// Uncomment the rpc that you want to use:
 			//sendEmergency();	
-			//liveFeed();
+			liveFeed();
 			//calculatePedestrianNumber();
-			streetAlert();	
+			//streetAlert();	
 			
 		} catch (StatusRuntimeException e) {
 			System.out.println(e.getMessage());
@@ -65,7 +65,7 @@ public class TrafficClient {
 	// server streaming
 	public static void liveFeed() {
 		//prepare the request
-		Area requestArea = Area.newBuilder().setIntArea(4).build();
+		Area requestArea = Area.newBuilder().setIntArea(2).build();
 		
 		//stream the responses
 		bStub.liveFeed(requestArea).forEachRemaining(StreetSituation -> {

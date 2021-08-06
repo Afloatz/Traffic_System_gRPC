@@ -82,7 +82,7 @@ public class TrafficServer {
 				// Now build our response
 				StreetSituation.Builder response = StreetSituation.newBuilder(); // builder object
 				
-				// Provides different livefeed depending on the area (Dublin 1 to 22)
+				// Provides different livefeed depending on the area (Dublin 1 to 24)
 				// Note: for this project I only entered responses for Dublin 1 and 2 to avoid entering 22 different set of responses
 				switch (intArea) {
 				case 1: //Dublin 1
@@ -110,6 +110,7 @@ public class TrafficServer {
 					response.setTextSituation("Dame Street has an emergency situation.");			
 					responseObserver.onNext(response.build()); 
 					Thread.sleep(1000);
+					break;
 				default: //User input validation, user enters a wrong input (not supported district number)
 					response.setTextSituation("Please enter a valid district number for Dublin (1 or 2)");			
 					responseObserver.onNext(response.build()); 
@@ -135,9 +136,15 @@ public class TrafficServer {
 
 				@Override
 				public void onNext(Video value) {
-					System.out.println("Receiving pedestrian numbers from client: " + value.getPedestrianNumber());
-					//store the values received from the camera in the ArrayList
-					pedestrians.add(value.getPedestrianNumber());
+					// user input validation: check if it's an integer that is received
+					if (value.getPedestrianNumber() == (int) value.getPedestrianNumber()) {
+						System.out.println("Receiving pedestrian numbers from client: " + value.getPedestrianNumber());
+						//store the values received from the camera in the ArrayList
+						pedestrians.add(value.getPedestrianNumber());
+					} else {
+						System.out.println("Enter an integer!");
+					}
+					
 				}
 
 				@Override

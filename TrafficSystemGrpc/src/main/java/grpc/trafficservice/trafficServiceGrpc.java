@@ -201,7 +201,7 @@ public final class trafficServiceGrpc {
     /**
      * <pre>
      * Server streaming: provide a live feed to the user on the current pedestrian traffic situation in a particular area.
-     * example of area: Dublin 1 to Dublin 22
+     * example of area: Dublin 1 to Dublin 24
      * </pre>
      */
     public void liveFeed(grpc.trafficservice.Area request,
@@ -301,7 +301,7 @@ public final class trafficServiceGrpc {
     /**
      * <pre>
      * Server streaming: provide a live feed to the user on the current pedestrian traffic situation in a particular area.
-     * example of area: Dublin 1 to Dublin 22
+     * example of area: Dublin 1 to Dublin 24
      * </pre>
      */
     public void liveFeed(grpc.trafficservice.Area request,
@@ -370,7 +370,7 @@ public final class trafficServiceGrpc {
     /**
      * <pre>
      * Server streaming: provide a live feed to the user on the current pedestrian traffic situation in a particular area.
-     * example of area: Dublin 1 to Dublin 22
+     * example of area: Dublin 1 to Dublin 24
      * </pre>
      */
     public java.util.Iterator<grpc.trafficservice.StreetSituation> liveFeed(
